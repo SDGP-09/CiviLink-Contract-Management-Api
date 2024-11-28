@@ -1,4 +1,4 @@
-package com.civilink.civilink_contract_manager.services.serviceImpl;
+package com.civilink.civilink_contract_manager.services.Impl;
 
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidItemDto;
@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
