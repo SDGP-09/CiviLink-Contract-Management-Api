@@ -1,5 +1,6 @@
 package com.civilink.civilink_contract_manager.entities;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,13 +16,17 @@ import java.util.List;
 @Data
 @Builder
 public class Bid {
-    private String bidId;
+
+    @Id
+    private String id;
     private String clientName;
-    private String projectName;
-    private String ActivityName;
+    private String activityName;
 
     @DBRef
     private BidInvitation bidInvitation;
 
     private List<String> bidResponds;
+
+    @DBRef
+    private Project project;
 }

@@ -54,7 +54,7 @@ public class BidsController {
         );
     }
 
-    @PostMapping("new-bid")
+    @PostMapping("/new-bid")
     public ResponseEntity<StandardResponse> makeNewBid(
             @RequestBody RequestBidDto requestBidDto
     ){

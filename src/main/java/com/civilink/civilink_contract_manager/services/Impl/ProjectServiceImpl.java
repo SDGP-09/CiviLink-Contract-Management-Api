@@ -13,6 +13,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
 
+
+
     @Override
     public void createProject(RequestProjectDto requestProjectDto) {
 
@@ -24,7 +26,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .projectDescription(requestProjectDto.getProjectDescription())
                 .projectNumber(requestProjectDto.getProjectNumber())
                 .projectStatus(requestProjectDto.getProjectStatus())
-                .projectId(requestProjectDto.getProjectId())
+                .id(requestProjectDto.getId())
                 .bid(null)
                 .build();
 

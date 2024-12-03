@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class RequestProjectDto {
 
-    private String projectId;
+
+    private String id;
     private int projectNumber;
     private String projectName;
     private String projectDescription;

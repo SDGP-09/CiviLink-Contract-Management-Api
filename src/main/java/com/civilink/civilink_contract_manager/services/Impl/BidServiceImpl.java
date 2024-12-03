@@ -6,8 +6,10 @@ import com.civilink.civilink_contract_manager.dtos.response.ResponseAddBidInvita
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidDto;
 import com.civilink.civilink_contract_manager.entities.Bid;
 import com.civilink.civilink_contract_manager.entities.BidInvitation;
+import com.civilink.civilink_contract_manager.entities.Project;
 import com.civilink.civilink_contract_manager.repositories.BidInvitationRepository;
 import com.civilink.civilink_contract_manager.repositories.BidRepository;
+import com.civilink.civilink_contract_manager.repositories.ProjectRepository;
 import com.civilink.civilink_contract_manager.services.BidService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,22 +24,32 @@ public class BidServiceImpl implements BidService {
 
     private final BidRepository bidRepository;
 
+    private final ProjectRepository projectRepository;
+
     @Override
     public ResponseBidDto createBid(RequestBidDto requestBidDto) {
+
+        Project project = projectRepository.findById(requestBidDto.getProjectId()).get();
+
+
+
         Bid bid = Bid.builder()
-                .bidId(requestBidDto.getBidId())
+                .id(requestBidDto.getId())
                 .clientName(requestBidDto.getClientName())
                 .bidResponds(new ArrayList<>())
-                .ActivityName(requestBidDto.getActivityName())
+                .activityName(requestBidDto.getActivityName())
                 .bidInvitation(null)
-                .projectName(requestBidDto.getProjectName())
+                .project(project)
                 .build();
 
         bidRepository.save(bid);
 
-        return new ResponseBidDto(bid.getBidId(),
+        project.setBid(bid);
+        projectRepository.save(project);
+
+        return new ResponseBidDto(bid.getId(),
                 bid.getClientName(),
-                bid.getProjectName(),
+                bid.getProject().getProjectName(),
                 bid.getActivityName());
     }
 
@@ -50,7 +62,7 @@ public class BidServiceImpl implements BidService {
         bid.setBidInvitation(invitation);
         bidRepository.save(bid);
 
-        return new ResponseAddBidInvitationDto(bid.getBidId(), bid,invitation);
+        return new ResponseAddBidInvitationDto(bid.getId(), bid,invitation);
     }
 
 }
