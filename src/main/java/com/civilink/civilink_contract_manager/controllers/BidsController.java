@@ -1,24 +1,15 @@
 package com.civilink.civilink_contract_manager.controllers;
 
 
-import com.civilink.civilink_contract_manager.dtos.requests.RequestAddBidInvitationDto;
-import com.civilink.civilink_contract_manager.dtos.requests.RequestBidDto;
-import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitationDto;
-import com.civilink.civilink_contract_manager.dtos.requests.RequestBidItemDto;
-import com.civilink.civilink_contract_manager.dtos.response.ResponseAddBidInvitationDto;
-import com.civilink.civilink_contract_manager.dtos.response.ResponseBidDto;
-import com.civilink.civilink_contract_manager.dtos.response.ResponseBidInvitationDto;
-import com.civilink.civilink_contract_manager.dtos.response.ResponseBidItemDto;
+import com.civilink.civilink_contract_manager.dtos.requests.*;
+import com.civilink.civilink_contract_manager.dtos.response.*;
 import com.civilink.civilink_contract_manager.services.BidInvitationService;
 import com.civilink.civilink_contract_manager.services.BidService;
 import com.civilink.civilink_contract_manager.util.StandardResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/bids")
@@ -77,4 +68,37 @@ public class BidsController {
                 HttpStatus.CREATED
         );
     }
+
+    @GetMapping("/search-bid-invitation")
+    public ResponseEntity<StandardResponse> searchInvitation(
+            @RequestBody RequestAllBidInvitationDto requestAllBidInvitationDto
+            ){
+        ResponseAllBidInvitationDto responseAllBidInvitationDto = bidInvitationService.sendAllBidInvitation(requestAllBidInvitationDto);
+
+
+        return new ResponseEntity<>(
+                new StandardResponse(200,"{ADD A MEANINGFUL MESSAGE HERE}",responseAllBidInvitationDto),
+                HttpStatus.CREATED //get clarification whether this is correct or wrong ?
+
+        );
+    }
+
+    @GetMapping("/search-bid")
+    public ResponseEntity<StandardResponse>  searchBid(
+            @RequestBody RequestAllBidDto requestAllBidDto
+    ){
+        ResponseAllBidDto responseAllBidDto1 = bidService.findAllBids(requestAllBidDto);
+
+        return new ResponseEntity<>(
+                new StandardResponse(200,"{ADD A MEANINGFUL MESSAGE HERE}",responseAllBidDto1),
+                HttpStatus.CREATED//get clarification whether this is correct or wrong ?
+        );
+    }
+
+
+
+
+
+
+
 }

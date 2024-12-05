@@ -1,7 +1,9 @@
 package com.civilink.civilink_contract_manager.services.Impl;
 
+import com.civilink.civilink_contract_manager.dtos.requests.RequestAllBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidItemDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseAllBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidItemDto;
 import com.civilink.civilink_contract_manager.entities.BidInvitation;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -56,5 +59,15 @@ public class BidInvitationServiceImpl implements BidInvitationService {
         return new ResponseBidItemDto(bidItem);
 
 
+    }
+
+    @Override
+    public ResponseAllBidInvitationDto sendAllBidInvitation(RequestAllBidInvitationDto requestAllBidInvitationDto) {
+        List<BidInvitation> bidInvitations =
+                bidInvitationRepository.findByIdAndStatus(requestAllBidInvitationDto.getCreatedBy(), requestAllBidInvitationDto.getStatus());
+
+        BidInvitation[] toSend = new BidInvitation[bidInvitations.size()];
+        toSend = bidInvitations.toArray(toSend);
+        return new ResponseAllBidInvitationDto(toSend);
     }
 }
