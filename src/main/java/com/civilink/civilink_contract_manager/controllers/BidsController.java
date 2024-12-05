@@ -1,10 +1,7 @@
 package com.civilink.civilink_contract_manager.controllers;
 
 
-import com.civilink.civilink_contract_manager.dtos.requests.RequestAddBidInvitationDto;
-import com.civilink.civilink_contract_manager.dtos.requests.RequestBidDto;
-import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitationDto;
-import com.civilink.civilink_contract_manager.dtos.requests.RequestBidItemDto;
+import com.civilink.civilink_contract_manager.dtos.requests.*;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseAddBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidInvitationDto;
@@ -15,10 +12,7 @@ import com.civilink.civilink_contract_manager.util.StandardResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/bids")
@@ -74,6 +68,20 @@ public class BidsController {
 
         return new ResponseEntity<>(
                 new StandardResponse(200,"Bid invitation added",responseAddBidInvitationDto),
+                HttpStatus.CREATED
+        );
+    }
+
+    @DeleteMapping("/delete-bid-invitation")
+    public ResponseEntity<StandardResponse> deleteBidInvitation(
+            @RequestBody RequestDeleteBidInvitationDto requestDeleteBidInvitationDto
+            ){
+        bidInvitationService.deleteBidInvitation(requestDeleteBidInvitationDto);
+
+
+
+        return new ResponseEntity<>(
+                new StandardResponse(200,"Bid invitation deleted",""),
                 HttpStatus.CREATED
         );
     }

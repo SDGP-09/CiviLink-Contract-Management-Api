@@ -2,6 +2,7 @@ package com.civilink.civilink_contract_manager.services.Impl;
 
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidItemDto;
+import com.civilink.civilink_contract_manager.dtos.requests.RequestDeleteBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidItemDto;
 import com.civilink.civilink_contract_manager.entities.BidInvitation;
@@ -56,5 +57,16 @@ public class BidInvitationServiceImpl implements BidInvitationService {
         return new ResponseBidItemDto(bidItem);
 
 
+    }
+
+    @Override
+    public void deleteBidInvitation(RequestDeleteBidInvitationDto requestDeleteBidInvitationDto) {
+        if (bidInvitationRepository.existsById(requestDeleteBidInvitationDto.getId())) {
+            bidInvitationRepository.deleteById(requestDeleteBidInvitationDto.getId());
+//        } else {
+//            throw new IllegalArgumentException("Order with ID " + orderId + " does not exist.");
+//        }
+            // should we uncomment this line or can spring take care of this it self ?
+        }
     }
 }
