@@ -95,6 +95,19 @@ public class BidsController {
         );
     }
 
+    @PatchMapping("/update-bid-invitation")
+    public ResponseEntity<StandardResponse> updateBidInvitation(
+            @RequestBody RequestBidInvitationUpdateDto requestBidInvitationUpdateDto
+    ){
+        ResponseBidInvitationDto responseBidInvitationDto =
+                bidInvitationService.updateBidInvitation(requestBidInvitationUpdateDto);
+//        return null;
+        return new ResponseEntity<>(
+                new StandardResponse(200,"{ADD A MEANINGFUL MESSAGE HERE}",requestBidInvitationUpdateDto),
+                HttpStatus.CREATED//get clarification whether this is correct or wrong ?
+        );
+    }
+
 
 
 
