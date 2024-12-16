@@ -2,6 +2,8 @@ package com.civilink.civilink_contract_manager.controllers;
 
 import com.civilink.civilink_contract_manager.dtos.requests.RequestContractDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestContractItemDto;
+import com.civilink.civilink_contract_manager.dtos.requests.RequestContractorUpdateDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseContractorDto;
 import com.civilink.civilink_contract_manager.services.ContractItemsService;
 import com.civilink.civilink_contract_manager.services.ContractService;
 import com.civilink.civilink_contract_manager.util.StandardResponse;

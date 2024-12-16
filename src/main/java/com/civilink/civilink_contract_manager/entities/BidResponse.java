@@ -1,5 +1,6 @@
 package com.civilink.civilink_contract_manager.entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,20 +11,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document
+@Document("bidResponses")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Contractor {
+
+
+public class BidResponse {
     @Id
     private String id;
-    private String name;
-    private String contact;
+
+    private String date;
+    private String url;
 
     @DBRef
-    private List<BidResponse> bidResponses;
+    private List<BidInvitation> bidInvitations;
 
     @DBRef
-    private List<Post> posts;
+    private List<BidItem> bidItems;
+
+
 }

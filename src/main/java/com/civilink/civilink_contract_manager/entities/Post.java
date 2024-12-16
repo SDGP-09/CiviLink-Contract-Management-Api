@@ -5,25 +5,23 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
-@Document
+@Document("Posts")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Contractor {
+
+
+public class Post {
+
     @Id
     private String id;
-    private String name;
-    private String contact;
+    private String title;
+    private String date;
 
-    @DBRef
-    private List<BidResponse> bidResponses;
 
-    @DBRef
-    private List<Post> posts;
+
+
 }
