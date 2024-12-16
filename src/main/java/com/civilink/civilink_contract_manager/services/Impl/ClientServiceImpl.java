@@ -2,6 +2,7 @@ package com.civilink.civilink_contract_manager.services.Impl;
 
 import com.civilink.civilink_contract_manager.dtos.requests.RequestClientDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestClientProjectDto;
+import com.civilink.civilink_contract_manager.dtos.requests.RequestClientUpdateDTO;
 import com.civilink.civilink_contract_manager.entities.Client;
 import com.civilink.civilink_contract_manager.entities.Project;
 import com.civilink.civilink_contract_manager.repositories.ClientRepository;
@@ -40,6 +41,11 @@ public class ClientServiceImpl implements ClientService {
         client.getProjectList().add(project);
 
         clientRepository.save(client);
+    }
+
+    @Override
+    public void updateClient(RequestClientUpdateDTO requestClientUpdateDTO) {
+        
     }
 
 
