@@ -19,7 +19,7 @@ public class Consultant {
     @Id
     private String id;
     private String name;
-    private String Specializations;
+    private String specializations;
 
     @DBRef
     private List<Project> projects;
