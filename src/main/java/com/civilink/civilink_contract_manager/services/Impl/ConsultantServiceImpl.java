@@ -5,6 +5,7 @@ import com.civilink.civilink_contract_manager.dtos.requests.RequestConsultantDto
 import com.civilink.civilink_contract_manager.dtos.requests.RequestConsultantProjectDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestConsultantUpdateDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseClientDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseConsultantAllDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseConsultantDto;
 import com.civilink.civilink_contract_manager.entities.Client;
 import com.civilink.civilink_contract_manager.entities.Consultant;
@@ -16,6 +17,8 @@ import com.civilink.civilink_contract_manager.repositories.ProjectRepository;
 import com.civilink.civilink_contract_manager.services.ConsultantService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.bcel.Const;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -81,5 +84,44 @@ public class ConsultantServiceImpl implements ConsultantService {
 
 
         return new ResponseConsultantDto(consultant);
+    }
+
+    @Override
+    public ResponseConsultantAllDto findAll(RequestConsultantDto requestConsultantDto) {
+
+
+        if(requestConsultantDto.getId() != null){
+            Consultant[] consultant = {consultantRepository.findById(requestConsultantDto.getId()).orElse(null)};
+            return new ResponseConsultantAllDto(consultant);
+
+        }
+
+        Consultant consultant = Consultant.builder()
+                .name(requestConsultantDto.getName())
+                .specializations(requestConsultantDto.getSpecializations())
+                .build();
+
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
+        Example<Consultant> example = Example.of(consultant, matcher);
+        List<Consultant> consultants = consultantRepository.findAll(example);
+        Consultant[] toReturn = new Consultant[consultants.size()];
+        toReturn = consultants.toArray(toReturn);
+
+        return new ResponseConsultantAllDto(toReturn);
+    }
+
+    @Override
+    public ResponseConsultantDto delete(RequestConsultantByIdDto requestConsultantByIdDto) throws ConsultantNotFoundException {
+
+        Consultant consultant = consultantRepository.findById(requestConsultantByIdDto.getId()).orElse(null);
+
+        if(consultant == null) {
+            throw new ConsultantNotFoundException("Consultant not found with the id of: " + requestConsultantByIdDto.getId());
+        } else {
+            consultantRepository.delete(consultant);
+        }
+
+
+        return null;
     }
 }

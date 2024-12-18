@@ -5,6 +5,7 @@ import com.civilink.civilink_contract_manager.dtos.requests.RequestConsultantByI
 import com.civilink.civilink_contract_manager.dtos.requests.RequestConsultantDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestConsultantProjectDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestConsultantUpdateDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseConsultantAllDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseConsultantDto;
 import com.civilink.civilink_contract_manager.exception.ConsultantNotFoundException;
 
@@ -15,4 +16,8 @@ public interface ConsultantService {
     public ResponseConsultantDto update(RequestConsultantUpdateDto requestConsultantUpdateDto) throws ConsultantNotFoundException;
 
     public ResponseConsultantDto findById(RequestConsultantByIdDto requestConsultantByIdDto) throws ConsultantNotFoundException;
+
+    public ResponseConsultantAllDto findAll(RequestConsultantDto requestConsultantDto);
+
+    public ResponseConsultantDto delete(RequestConsultantByIdDto requestConsultantByIdDto) throws ConsultantNotFoundException;
 }
