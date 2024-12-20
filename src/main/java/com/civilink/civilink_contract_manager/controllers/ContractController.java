@@ -3,7 +3,9 @@ package com.civilink.civilink_contract_manager.controllers;
 import com.civilink.civilink_contract_manager.dtos.requests.*;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseContractAllDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseContractDto;
-import com.civilink.civilink_contract_manager.dtos.response.ResponseContractorDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseContractItemsAllDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseContractItemsDto;
+import com.civilink.civilink_contract_manager.exception.ContractItemsNotFoundException;
 import com.civilink.civilink_contract_manager.exception.ContractNotFoundException;
 import com.civilink.civilink_contract_manager.services.ContractItemsService;
 import com.civilink.civilink_contract_manager.services.ContractService;
@@ -31,7 +33,7 @@ public class ContractController {
     }
 
     @PostMapping("/create-contract-item")
-    public ResponseEntity<StandardResponse> createContractItem(@RequestBody RequestContractItemDto contractItemDto) {
+    public ResponseEntity<StandardResponse> createContractItem(@RequestBody RequestContractItemsDto contractItemDto) {
         contractItemsService.createContractItems(contractItemDto);
 
         return new ResponseEntity<>(
@@ -92,6 +94,61 @@ public class ContractController {
         try {
             contractService.deleteContract(requestContractByIdDto);
         } catch (ContractNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<StandardResponse> updateContractItems(
+            @RequestBody RequestContractItemsUpdateDto requestContractItemsUpdateDto) {
+        ResponseContractItemsDto response = null;
+        try {
+            response = contractItemsService.updateContractItems(requestContractItemsUpdateDto);
+        } catch (ContractItemsNotFoundException e) {
+            System.out.println(e);
+        }
+
+        return new ResponseEntity<>(
+                new StandardResponse(201, "ContractItems details updated", response),
+                HttpStatus.CREATED
+        );
+    }
+
+    @PatchMapping("/find-by-id")
+    public ResponseEntity<StandardResponse> findContractItemsById(
+            @RequestBody RequestContractItemsByIdDto requestContractItemsByIdDto) {
+
+        ResponseContractItemsDto response = null;
+        try {
+            response = contractItemsService.findById(requestContractItemsByIdDto);
+        } catch (ContractItemsNotFoundException e) {
+            System.out.println(e);
+        }
+
+        return new ResponseEntity<>(
+                new StandardResponse(201, "ContractItems retrieved", response),
+                HttpStatus.CREATED
+        );
+    }
+
+    @PostMapping("/find-all")
+    public ResponseEntity<StandardResponse> findAllContractItems(
+            @RequestBody RequestContractItemsDto requestContractItemsDto) {
+
+        ResponseContractItemsAllDto responseAll = contractItemsService.findAll(requestContractItemsDto);
+
+        return new ResponseEntity<>(
+                new StandardResponse(201, "ContractItems retrieved", responseAll),
+                HttpStatus.CREATED
+        );
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteContractItems(
+            @RequestBody RequestContractItemsByIdDto requestContractItemsByIdDto) {
+        try {
+            contractItemsService.deleteContractItems(requestContractItemsByIdDto);
+        } catch (ContractItemsNotFoundException e) {
             System.out.println(e);
         }
     }
