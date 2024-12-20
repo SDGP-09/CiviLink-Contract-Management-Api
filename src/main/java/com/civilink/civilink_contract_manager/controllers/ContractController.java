@@ -1,19 +1,17 @@
 package com.civilink.civilink_contract_manager.controllers;
 
-import com.civilink.civilink_contract_manager.dtos.requests.RequestContractDto;
-import com.civilink.civilink_contract_manager.dtos.requests.RequestContractItemDto;
-import com.civilink.civilink_contract_manager.dtos.requests.RequestContractorUpdateDto;
+import com.civilink.civilink_contract_manager.dtos.requests.*;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseContractAllDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseContractDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseContractorDto;
+import com.civilink.civilink_contract_manager.exception.ContractNotFoundException;
 import com.civilink.civilink_contract_manager.services.ContractItemsService;
 import com.civilink.civilink_contract_manager.services.ContractService;
 import com.civilink.civilink_contract_manager.util.StandardResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/contracts")
@@ -41,4 +39,61 @@ public class ContractController {
                 HttpStatus.CREATED
             );
     }
+
+    @PatchMapping("/update")
+    public ResponseEntity<StandardResponse> updateContract(
+            @RequestBody RequestContractUpdateDto requestContractUpdateDto) {
+
+        ResponseContractDto responseContractDto = null;
+        try {
+            responseContractDto = contractService.updateContract(requestContractUpdateDto);
+        } catch (ContractNotFoundException e) {
+            System.out.println(e);
+        }
+
+        return new ResponseEntity<>(
+                new StandardResponse(201, "Contract details updated", responseContractDto),
+                HttpStatus.CREATED
+        );
+    }
+
+    @PatchMapping("/find-contract-by-id")
+    public ResponseEntity<StandardResponse> findContractById(
+            @RequestBody RequestContractByIdDto requestContractByIdDto) {
+
+        ResponseContractDto responseContractDto = null;
+        try {
+            responseContractDto = contractService.findById(requestContractByIdDto);
+        } catch (ContractNotFoundException e) {
+            System.out.println(e);
+        }
+
+        return new ResponseEntity<>(
+                new StandardResponse(201, "Contract retrieved", responseContractDto),
+                HttpStatus.CREATED
+        );
+    }
+
+    @PostMapping("/find-all-contract")
+    public ResponseEntity<StandardResponse> findAllContracts(
+            @RequestBody RequestContractDto requestContractDto) {
+
+        ResponseContractAllDto responseContractAllDto = contractService.findAll(requestContractDto);
+
+        return new ResponseEntity<>(
+                new StandardResponse(201, "Contracts retrieved", responseContractAllDto),
+                HttpStatus.CREATED
+        );
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteContract(
+            @RequestBody RequestContractByIdDto requestContractByIdDto) {
+        try {
+            contractService.deleteContract(requestContractByIdDto);
+        } catch (ContractNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
 }
