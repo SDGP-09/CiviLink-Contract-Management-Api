@@ -10,23 +10,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document("Bid")
+@Document("Consultant")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Bid {
-
+public class Consultant {
     @Id
     private String id;
-    private String clientName;
-    private String activityName;
+    private String name;
+    private String specializations;
 
     @DBRef
-    private BidInvitation bidInvitation;
+    private List<Project> projects;
 
-    private List<String> bidResponds;
-
-    @DBRef
-    private Project project;
 }

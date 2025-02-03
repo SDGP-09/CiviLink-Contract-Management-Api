@@ -1,5 +1,6 @@
 package com.civilink.civilink_contract_manager.dtos.requests;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RequestBidDto {
+public class RequestClientDto {
     private String id;
-    private String clientName;
-    private String activityName;
-    private String projectId;
+    private String name;
+    private String contact;
+
 }

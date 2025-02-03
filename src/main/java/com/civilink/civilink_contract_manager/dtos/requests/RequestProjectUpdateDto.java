@@ -1,5 +1,6 @@
 package com.civilink.civilink_contract_manager.dtos.requests;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RequestProjectDto {
 
-
+public class RequestProjectUpdateDto {
     private String id;
     private int projectNumber;
     private String projectName;
@@ -18,5 +18,4 @@ public class RequestProjectDto {
     private String projectEndDate;
     private String projectStatus;
     private String projectCategory;
-    private String clientId;
 }

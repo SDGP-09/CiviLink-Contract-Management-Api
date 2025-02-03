@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RequestBidDto {
+public class RequestContractItemsDto {
     private String id;
-    private String clientName;
-    private String activityName;
-    private String projectId;
+    private String url;
+    private String description;
+    private String contractId;
 }
