@@ -8,32 +8,22 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("projects")
+import java.util.List;
+
+@Document
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Project {
-
+public class Contractor {
     @Id
     private String id;
-    private int projectNumber;
-    private String projectName;
-    private String projectDescription;
-    private String projectStartDate;
-    private String projectEndDate;
-    private String projectStatus;
-    private String projectCategory;
+    private String name;
+    private String contact;
 
     @DBRef
-    private Bid bid;
+    private List<BidResponse> bidResponses;
 
     @DBRef
-    private Contract contract;
-
-    @DBRef
-    private Client client;
-
-    @DBRef
-    private Consultant consultant;
+    private List<Post> posts;
 }

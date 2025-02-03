@@ -18,4 +18,5 @@ public class RequestProjectDto {
     private String projectEndDate;
     private String projectStatus;
     private String projectCategory;
+    private String clientId;
 }
