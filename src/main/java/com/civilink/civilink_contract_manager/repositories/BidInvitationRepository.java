@@ -1,18 +1,19 @@
 package com.civilink.civilink_contract_manager.repositories;
 
 import com.civilink.civilink_contract_manager.entities.BidInvitation;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
 
 import java.util.List;
 import java.util.Optional;
 
-public interface BidInvitationRepository extends MongoRepository<BidInvitation, String> {
+public interface BidInvitationRepository extends JpaRepository<BidInvitation, Long> {
 
-    @Query("{ 'id': ?0 }")
+
     Optional<BidInvitation> findById(String id);
 
-    @Query("{ 'id': ?0, $or: [ { 'status': ?1 }, { ?1: null } ] }")
+    @Query("SELECT b FROM BidInvitation b WHERE b.id = :id AND (:status IS NULL OR b.status = :status)")
     List<BidInvitation> findByIdAndStatus(String id, String status);
 
 }
