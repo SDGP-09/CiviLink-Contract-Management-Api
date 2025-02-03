@@ -2,6 +2,8 @@ package com.civilink.civilink_contract_manager.controllers;
 
 
 import com.civilink.civilink_contract_manager.dtos.requests.*;
+
+import com.civilink.civilink_contract_manager.dtos.response.*;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseAddBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidInvitationDto;
@@ -71,6 +73,47 @@ public class BidsController {
                 HttpStatus.CREATED
         );
     }
+  
+    @GetMapping("/search-bid-invitation")
+    public ResponseEntity<StandardResponse> searchInvitation(
+            @RequestBody RequestAllBidInvitationDto requestAllBidInvitationDto
+            ){
+        ResponseAllBidInvitationDto responseAllBidInvitationDto = bidInvitationService.sendAllBidInvitation(requestAllBidInvitationDto);
+
+
+        return new ResponseEntity<>(
+                new StandardResponse(200,"{ADD A MEANINGFUL MESSAGE HERE}",responseAllBidInvitationDto),
+                HttpStatus.CREATED //get clarification whether this is correct or wrong ?
+
+        );
+    }
+
+    @GetMapping("/search-bid")
+    public ResponseEntity<StandardResponse>  searchBid(
+            @RequestBody RequestAllBidDto requestAllBidDto
+    ){
+        ResponseAllBidDto responseAllBidDto1 = bidService.findAllBids(requestAllBidDto);
+
+        return new ResponseEntity<>(
+                new StandardResponse(200,"{ADD A MEANINGFUL MESSAGE HERE}",responseAllBidDto1),
+                HttpStatus.CREATED//get clarification whether this is correct or wrong ?
+        );
+    }
+
+    @PatchMapping("/update-bid-invitation")
+    public ResponseEntity<StandardResponse> updateBidInvitation(
+            @RequestBody RequestBidInvitationUpdateDto requestBidInvitationUpdateDto
+    ){
+        ResponseBidInvitationDto responseBidInvitationDto =
+                bidInvitationService.updateBidInvitation(requestBidInvitationUpdateDto);
+//        return null;
+        return new ResponseEntity<>(
+                new StandardResponse(200,"{ADD A MEANINGFUL MESSAGE HERE}",requestBidInvitationUpdateDto),
+                HttpStatus.CREATED//get clarification whether this is correct or wrong ?
+        );
+    }
+
+
 
     @DeleteMapping("/delete-bid-invitation")
     public ResponseEntity<StandardResponse> deleteBidInvitation(
