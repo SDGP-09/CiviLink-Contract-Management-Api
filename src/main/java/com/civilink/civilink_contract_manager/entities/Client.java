@@ -1,9 +1,6 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +21,10 @@ public class Client {
     private long id;
     private String name;
     private String contact;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
 
 }

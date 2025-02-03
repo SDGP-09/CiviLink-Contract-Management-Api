@@ -1,9 +1,6 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -21,5 +18,9 @@ public class Bid {
     private String clientName;
     private String activityName;
 
+
+    @OneToOne
+    @JoinColumn(name = "bid_id")
+    private Bid bid;
 
 }

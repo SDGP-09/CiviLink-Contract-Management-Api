@@ -1,17 +1,13 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
+
+
 
 @Entity
 @Data
@@ -28,7 +24,9 @@ public class BidInvitation {
     private String createdBy;
     private String status;
 
-
+    @ManyToOne
+    @JoinColumn(name = "bid_invitation_id")
+    private BidInvitation bidInvitation;
 
 
 

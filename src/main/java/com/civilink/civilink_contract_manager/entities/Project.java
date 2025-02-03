@@ -1,9 +1,6 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,5 +24,9 @@ public class Project {
     private String projectStatus;
     private String projectCategory;
 
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private  Project project;
 
 }
