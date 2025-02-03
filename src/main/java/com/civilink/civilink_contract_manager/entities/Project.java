@@ -1,22 +1,24 @@
 package com.civilink.civilink_contract_manager.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("projects")
+
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 public class Project {
-
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private int projectNumber;
     private String projectName;
     private String projectDescription;
@@ -25,15 +27,5 @@ public class Project {
     private String projectStatus;
     private String projectCategory;
 
-    @DBRef
-    private Bid bid;
 
-    @DBRef
-    private Contract contract;
-
-    @DBRef
-    private Client client;
-
-    @DBRef
-    private Consultant consultant;
 }

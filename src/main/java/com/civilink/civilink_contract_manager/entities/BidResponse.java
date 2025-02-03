@@ -1,17 +1,18 @@
 package com.civilink.civilink_contract_manager.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 
 import java.util.List;
 
-@Document("bidResponses")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -20,16 +21,12 @@ import java.util.List;
 
 public class BidResponse {
     @Id
-    private String id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String date;
     private String url;
 
-    @DBRef
-    private List<BidInvitation> bidInvitations;
 
-    @DBRef
-    private List<BidItem> bidItems;
 
 
 }

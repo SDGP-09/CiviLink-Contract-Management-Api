@@ -1,32 +1,25 @@
 package com.civilink.civilink_contract_manager.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.*;
+
 
 import java.util.List;
 
-@Document("Bid")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 public class Bid {
-
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String clientName;
     private String activityName;
 
-    @DBRef
-    private BidInvitation bidInvitation;
 
-    private List<String> bidResponds;
-
-    @DBRef
-    private Project project;
 }
