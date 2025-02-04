@@ -29,6 +29,11 @@ public class Project {
     @JoinColumn(name = "bid_id")  // Assuming each project is linked to one bid
     private Bid bid;
 
+    @ManyToOne
+    @JoinColumn(name = "consultant_id")  // Foreign key to link Project with Consultant
+    private Consultant consultant;  // Each project can be linked to one consultant
+
+
 //    @ManyToOne
 //    @JoinColumn(name = "project_id")
 //    private  Project project;

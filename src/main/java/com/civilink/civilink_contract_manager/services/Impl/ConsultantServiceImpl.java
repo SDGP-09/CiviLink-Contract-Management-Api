@@ -34,7 +34,7 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Override
     public void createConsultant(RequestConsultantDto requestConsultantDto) {
         Consultant consultant = Consultant.builder()
-                .id(requestConsultantDto.getId())
+                .id(Long.parseLong(requestConsultantDto.getId()))
                 .name(requestConsultantDto.getName())
                 .specializations(requestConsultantDto.getSpecializations())
                 .build();
@@ -42,8 +42,8 @@ public class ConsultantServiceImpl implements ConsultantService {
 
     @Override
     public void addProjectToConsultant(RequestConsultantProjectDto requestConsultantProjectDto) {
-        Consultant consultant = consultantRepository.findById(requestConsultantProjectDto.getConsultantId()).get();
-        Project project = projectRepository.findById(requestConsultantProjectDto.getProjectId()).get();
+        Consultant consultant = consultantRepository.findById(Long.valueOf(requestConsultantProjectDto.getConsultantId())).get();
+        Project project = projectRepository.findById(Long.valueOf(requestConsultantProjectDto.getProjectId())).get();
 
         consultant.getProjects().add(project);
 
@@ -55,7 +55,7 @@ public class ConsultantServiceImpl implements ConsultantService {
 
     @Override
     public ResponseConsultantDto update(RequestConsultantUpdateDto requestConsultantUpdateDto) throws ConsultantNotFoundException {
-        Consultant consultant = consultantRepository.findById(requestConsultantUpdateDto.getId()).orElse(null);
+        Consultant consultant = consultantRepository.findById(Long.valueOf(requestConsultantUpdateDto.getId())).orElse(null);
 
         if (consultant == null){
             throw new ConsultantNotFoundException("Consultant not found with the id of: " + requestConsultantUpdateDto.getId());
@@ -78,7 +78,7 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Override
     public ResponseConsultantDto findById(RequestConsultantByIdDto requestConsultantByIdDto) throws ConsultantNotFoundException {
 
-        Consultant consultant = consultantRepository.findById(requestConsultantByIdDto.getId()).orElse(null);
+        Consultant consultant = consultantRepository.findById(Long.valueOf(requestConsultantByIdDto.getId())).orElse(null);
 
         if (consultant == null) throw new ConsultantNotFoundException("Consultant not found with the id of: " + requestConsultantByIdDto.getId());
 
@@ -91,7 +91,7 @@ public class ConsultantServiceImpl implements ConsultantService {
 
 
         if(requestConsultantDto.getId() != null){
-            Consultant[] consultant = {consultantRepository.findById(requestConsultantDto.getId()).orElse(null)};
+            Consultant[] consultant = {consultantRepository.findById(Long.valueOf(requestConsultantDto.getId())).orElse(null)};
             return new ResponseConsultantAllDto(consultant);
 
         }
@@ -113,7 +113,7 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Override
     public ResponseConsultantDto delete(RequestConsultantByIdDto requestConsultantByIdDto) throws ConsultantNotFoundException {
 
-        Consultant consultant = consultantRepository.findById(requestConsultantByIdDto.getId()).orElse(null);
+        Consultant consultant = consultantRepository.findById(Long.valueOf(requestConsultantByIdDto.getId())).orElse(null);
 
         if(consultant == null) {
             throw new ConsultantNotFoundException("Consultant not found with the id of: " + requestConsultantByIdDto.getId());
