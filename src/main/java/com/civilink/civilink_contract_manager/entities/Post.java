@@ -22,9 +22,15 @@ public class Post {
     private String date;
 
 
+    // Corrected ManyToOne relationship to Contractor
     @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @JoinColumn(name = "contractor_id") // Foreign key to Contractor
+    private Contractor contractor;
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "post_id")
+//    private Post post;
 
 
 }

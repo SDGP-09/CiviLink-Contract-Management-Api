@@ -22,9 +22,18 @@ public class Contractor {
     private String contact;
 
 
-    @ManyToOne
-    @JoinColumn(name = "contractor_id")
-    private Contractor contractor;
+    // Add OneToMany relationship with BidResponse
+    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BidResponse> bidResponses;
+
+    // Add OneToMany relationship with Post
+    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "contractor_id")
+//    private Contractor contractor;
 
 
 }

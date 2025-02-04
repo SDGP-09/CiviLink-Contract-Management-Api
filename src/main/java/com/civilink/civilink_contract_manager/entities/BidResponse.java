@@ -23,9 +23,15 @@ public class BidResponse {
     private String date;
     private String url;
 
-    @OneToOne
-    @JoinColumn(name = "bid_response_id")
-    private BidResponse bidResponse;
+    // Corrected ManyToOne relationship to Contractor
+    @ManyToOne
+    @JoinColumn(name = "contractor_id") // Foreign key to Contractor
+    private Contractor contractor;
+
+
+//    @OneToOne
+//    @JoinColumn(name = "bid_response_id")
+//    private BidResponse bidResponse;
 
 
 }

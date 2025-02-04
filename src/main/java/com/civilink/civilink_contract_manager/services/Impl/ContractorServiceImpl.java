@@ -32,7 +32,7 @@ public class ContractorServiceImpl implements ContractorService {
     @Override
     public void createContractor(RequestContractorDto requestContractorDto) {
         Contractor contractor = Contractor.builder()
-                .id(requestContractorDto.getId())
+                .id(Long.parseLong(requestContractorDto.getId()))
                 .name(requestContractorDto.getName())
                 .contact(requestContractorDto.getContact())
                 .build();
@@ -42,7 +42,7 @@ public class ContractorServiceImpl implements ContractorService {
 
     @Override
     public ResponseContractorDto updateContractor(RequestContractorUpdateDto requestContractorUpdateDto) throws ContractorNotFoundException {
-        Contractor contractor = contractorRepository.findById(requestContractorUpdateDto.getId()).orElse(null);
+        Contractor contractor = contractorRepository.findById(Long.valueOf(requestContractorUpdateDto.getId())).orElse(null);
         if (contractor == null) throw new ContractorNotFoundException("Contractor not found with the id of: " + requestContractorUpdateDto.getId());
 
         if (requestContractorUpdateDto.getName() != null) contractor.setName(requestContractorUpdateDto.getName());
@@ -75,7 +75,7 @@ public class ContractorServiceImpl implements ContractorService {
 
     @Override
     public ResponseContractorDto findById(RequestContractorByIdDto requestContractorByIdDto) throws ContractorNotFoundException {
-        Contractor contractor = contractorRepository.findById(requestContractorByIdDto.getId()).orElse(null);
+        Contractor contractor = contractorRepository.findById(Long.valueOf(requestContractorByIdDto.getId())).orElse(null);
         if (contractor == null) throw new ContractorNotFoundException("Contractor not found with the id of: " + requestContractorByIdDto.getId());
 
         return new ResponseContractorDto(contractor);
@@ -85,7 +85,7 @@ public class ContractorServiceImpl implements ContractorService {
     public ResponseContractorAllDto findAll(RequestContractorDto requestContractorDto) {
 
         if (requestContractorDto.getId() != null){
-            Contractor contractor = contractorRepository.findById(requestContractorDto.getId()).orElse(null);
+            Contractor contractor = contractorRepository.findById(Long.valueOf(requestContractorDto.getId())).orElse(null);
             Contractor[] contractors = {contractor};
             return new ResponseContractorAllDto(contractors);
 
@@ -111,7 +111,7 @@ public class ContractorServiceImpl implements ContractorService {
 
     @Override
     public void deleteContractor(RequestContractorByIdDto requestContractorByIdDto) throws ContractorNotFoundException {
-        Contractor contractor = contractorRepository.findById(requestContractorByIdDto.getId()).orElse(null);
+        Contractor contractor = contractorRepository.findById(Long.valueOf(requestContractorByIdDto.getId())).orElse(null);
 
         if (contractor ==  null) {
             throw  new ContractorNotFoundException("Contractor not found with the id of: " + requestContractorByIdDto.getId());
