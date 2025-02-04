@@ -6,7 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -23,6 +24,9 @@ public class BidInvitation {
     private String description;
     private String createdBy;
     private String status;
+
+    @OneToMany(mappedBy = "bidInvitation") // This assumes BidItem has a field bidInvitation
+    private List<BidItem> bidItems = new ArrayList<>(); // Initialize the list to prevent NullPointerException
 
     @ManyToOne
     @JoinColumn(name = "bid_invitation_id")

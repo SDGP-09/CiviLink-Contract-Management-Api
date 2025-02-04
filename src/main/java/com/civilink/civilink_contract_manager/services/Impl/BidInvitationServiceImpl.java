@@ -32,7 +32,7 @@ public class BidInvitationServiceImpl implements BidInvitationService {
     public ResponseBidInvitationDto createBidInvitation(RequestBidInvitationDto requestBidInvitationDto) {
 
         BidInvitation bidInvitation = BidInvitation.builder()
-                .id(requestBidInvitationDto.getId())
+                .id(Long.parseLong(requestBidInvitationDto.getId()))
                 .title(requestBidInvitationDto.getTitle())
                 .status(requestBidInvitationDto.getStatus())
                 .bidItems(new ArrayList<>())
@@ -50,7 +50,7 @@ public class BidInvitationServiceImpl implements BidInvitationService {
 
         BidInvitation invitation = bidInvitationRepository.findById("BID001").get();
 
-        BidItem bidItem = BidItem.builder().id(requestBidItemDto.getId())
+        BidItem bidItem = BidItem.builder().id(Long.parseLong(requestBidItemDto.getId()))
                 .name(requestBidItemDto.getName())
                 .url(requestBidItemDto.getUrl())
                 .build();
@@ -79,19 +79,19 @@ public class BidInvitationServiceImpl implements BidInvitationService {
     public ResponseBidInvitationDto updateBidInvitation(RequestBidInvitationUpdateDto requestBidInvitationUpdateDto) {
         BidInvitation existingBidInvitation = bidInvitationRepository.findById(requestBidInvitationUpdateDto.getId()).orElse(null);
 
-        if (existingBidInvitation == null){
+        if (existingBidInvitation == null) {
             throw new BidInvitationNotFoundException("Bid invitation not found with id: " + requestBidInvitationUpdateDto.getId());
         }
 
-        if (requestBidInvitationUpdateDto.getTitle() != null){
+        if (requestBidInvitationUpdateDto.getTitle() != null) {
             existingBidInvitation.setTitle(requestBidInvitationUpdateDto.getTitle());
         }
 
-        if (requestBidInvitationUpdateDto.getDescription() != null){
+        if (requestBidInvitationUpdateDto.getDescription() != null) {
             existingBidInvitation.setDescription(requestBidInvitationUpdateDto.getDescription());
         }
 
-        if (requestBidInvitationUpdateDto.getStatus() != null){
+        if (requestBidInvitationUpdateDto.getStatus() != null) {
             existingBidInvitation.setStatus(requestBidInvitationUpdateDto.getStatus());
         }
 
@@ -104,13 +104,12 @@ public class BidInvitationServiceImpl implements BidInvitationService {
 
         return new ResponseBidInvitationDto(updatedBid);
 
+    }
+
+    @Override
     public void deleteBidInvitation(RequestDeleteBidInvitationDto requestDeleteBidInvitationDto) {
-        if (bidInvitationRepository.existsById(requestDeleteBidInvitationDto.getId())) {
-            bidInvitationRepository.deleteById(requestDeleteBidInvitationDto.getId());
-//        } else {
-//            throw new IllegalArgumentException("Order with ID " + orderId + " does not exist.");
-//        }
-            // should we uncomment this line or can spring take care of this it self ?
+        if (bidInvitationRepository.existsById(Long.valueOf(requestDeleteBidInvitationDto.getId()))){
+            bidInvitationRepository.deleteById(Long.valueOf(requestDeleteBidInvitationDto.getId()));
         }
     }
 }
