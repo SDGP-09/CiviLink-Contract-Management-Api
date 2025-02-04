@@ -22,6 +22,13 @@ public class Contract {
     private String contractDate;
 
 
+    // Link Contract to Project
+    @ManyToOne
+    @JoinColumn(name = "project_id") // Foreign key reference
+    private Project project;
+
+
+    //Contract should store a List of ContractItems
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ContractItems> contractItems; // Reference contract items instead
 

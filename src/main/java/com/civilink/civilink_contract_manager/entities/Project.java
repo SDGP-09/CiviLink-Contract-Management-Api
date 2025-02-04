@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity
 @AllArgsConstructor
@@ -33,6 +35,9 @@ public class Project {
     @JoinColumn(name = "consultant_id")  // Foreign key to link Project with Consultant
     private Consultant consultant;  // Each project can be linked to one consultant
 
+    // A Project can have multiple Contracts
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Contract> contracts;
 
 //    @ManyToOne
 //    @JoinColumn(name = "project_id")
