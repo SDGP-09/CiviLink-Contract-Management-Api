@@ -26,7 +26,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void createProject(RequestProjectDto requestProjectDto) {
 
-        Client client = clientRepository.findById(requestProjectDto.getClientId()).get();
+        Client client = clientRepository.findById(Integer.valueOf(requestProjectDto.getClientId())).get();
 
         Project project = Project.builder()
                 .projectCategory(requestProjectDto.getProjectCategory())
@@ -36,7 +36,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .projectDescription(requestProjectDto.getProjectDescription())
                 .projectNumber(requestProjectDto.getProjectNumber())
                 .projectStatus(requestProjectDto.getProjectStatus())
-                .id(requestProjectDto.getId())
+                .id(Long.parseLong(requestProjectDto.getId()))
                 .client(client)
                 .build();
 
@@ -47,7 +47,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void updateProject(RequestProjectUpdateDto requestProjectUpdateDto) {
         RequestProjectFindByIdDto requestProjectFindByIdDto = new RequestProjectFindByIdDto(requestProjectUpdateDto.getId());
-        Project project = projectRepository.findById(requestProjectFindByIdDto.getId()).get();
+        Project project = projectRepository.findById(Long.valueOf(requestProjectFindByIdDto.getId())).get();
 
         project.setProjectCategory(requestProjectUpdateDto.getProjectCategory());
         project.setProjectEndDate(requestProjectUpdateDto.getProjectEndDate());
@@ -56,7 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setProjectDescription(requestProjectUpdateDto.getProjectDescription());
         project.setProjectNumber(requestProjectUpdateDto.getProjectNumber());
         project.setProjectStatus(requestProjectUpdateDto.getProjectStatus());
-        project.setId(requestProjectFindByIdDto.getId());
+        project.setId(Long.parseLong(requestProjectFindByIdDto.getId()));
         projectRepository.save(project);
 
 
@@ -64,7 +64,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project findById(RequestProjectFindByIdDto requestProjectFindByIdDto) {
-        Optional<Project> optional =  projectRepository.findById(requestProjectFindByIdDto.getId());
+        Optional<Project> optional =  projectRepository.findById(Long.valueOf(requestProjectFindByIdDto.getId()));
 
         if (optional.isPresent()) {
             return optional.get();

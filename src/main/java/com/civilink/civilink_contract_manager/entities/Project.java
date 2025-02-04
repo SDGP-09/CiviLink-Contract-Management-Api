@@ -39,8 +39,11 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contract> contracts;
 
-//    @ManyToOne
-//    @JoinColumn(name = "project_id")
-//    private  Project project;
+    //Add ManyToOne relationship to Client
+    @ManyToOne
+    @JoinColumn(name = "client_id") // Foreign key reference
+    private Client client;
+
+
 
 }
