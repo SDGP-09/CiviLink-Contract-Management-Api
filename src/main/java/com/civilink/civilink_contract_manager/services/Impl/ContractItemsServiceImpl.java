@@ -28,10 +28,10 @@ public class ContractItemsServiceImpl implements ContractItemsService {
     @Override
     public void createContractItems(RequestContractItemsDto contractItemDto) {
 
-        Contract contract = contractRepository.findById(contractItemDto.getContractId()).get();
+        Contract contract = contractRepository.findById(Integer.valueOf(contractItemDto.getContractId())).get();
 
         ContractItems contractItems = ContractItems.builder()
-                .id(contractItemDto.getId())
+                .id(Long.parseLong(contractItemDto.getId()))
                 .description(contractItemDto.getDescription())
                 .url(contractItemDto.getUrl())
                 .contract(contract)
@@ -39,7 +39,7 @@ public class ContractItemsServiceImpl implements ContractItemsService {
 
         contractItemsRepository.save(contractItems);
 
-        contract.getContracts().add(contractItems);
+        contract.getContractItems().add(contractItems);
         contractRepository.save(contract);
     }
 

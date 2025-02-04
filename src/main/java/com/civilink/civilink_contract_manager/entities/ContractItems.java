@@ -20,7 +20,12 @@ public class ContractItems {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "contract_items_id")
-    private ContractItems contractItems;
+    @JoinColumn(name = "contract_id") // Reference to Contract, NOT ContractItems
+    private Contract contract;
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "contract_items_id")
+//    private ContractItems contractItems;
 
 }

@@ -22,7 +22,10 @@ public class Contract {
     private String contractDate;
 
 
-    @ManyToOne
-    @JoinColumn(name = "contract_id")
-    private Contract contract;
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ContractItems> contractItems; // Reference contract items instead
+
+//    @ManyToOne
+//    @JoinColumn(name = "contract_id")
+//    private Contract contract;
 }
