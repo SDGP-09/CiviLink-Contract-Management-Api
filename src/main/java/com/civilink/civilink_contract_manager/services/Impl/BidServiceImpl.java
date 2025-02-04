@@ -35,12 +35,12 @@ public class BidServiceImpl implements BidService {
     @Override
     public ResponseBidDto createBid(RequestBidDto requestBidDto) {
 
-        Project project = projectRepository.findById(requestBidDto.getProjectId()).get();
+        Project project = projectRepository.findById(Long.valueOf(requestBidDto.getProjectId())).get();
 
 
 
         Bid bid = Bid.builder()
-                .id(requestBidDto.getId())
+                .id(Long.parseLong(requestBidDto.getId()))
                 .clientName(requestBidDto.getClientName())
                 .bidResponds(new ArrayList<>())
                 .activityName(requestBidDto.getActivityName())
@@ -63,7 +63,7 @@ public class BidServiceImpl implements BidService {
     public ResponseAddBidInvitationDto addBidInvitation(RequestAddBidInvitationDto requestAddBidInvitationDto) {
         BidInvitation invitation = bidInvitationRepository.findById(requestAddBidInvitationDto.getBidInvitationId()).get();
 
-        Bid bid = bidRepository.findById(requestAddBidInvitationDto.getBidId()).get();
+        Bid bid = bidRepository.findById(Long.valueOf(requestAddBidInvitationDto.getBidId())).get();
 
         bid.setBidInvitation(invitation);
         bidRepository.save(bid);
@@ -77,10 +77,18 @@ public class BidServiceImpl implements BidService {
 
 
         Bid bid = new Bid();
-        bid.setBidId(requestAllBidDto.getBidId());
+        bid.setId(Long.parseLong(requestAllBidDto.getBidId()));
         bid.setClientName(requestAllBidDto.getClientName());
-        bid.setProjectName(requestAllBidDto.getProjectName());
         bid.setActivityName(requestAllBidDto.getActivityName());
+
+        // Get the associated Project object
+        Project project = bid.getProject();  // Access the Project object from Bid
+        if (project != null) {
+            project.setProjectName(requestAllBidDto.getProjectName());  // Set the projectName on the Project object
+        }
+        // Now set the project object on the Bid
+        bid.setProject(project);
+
 
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
 

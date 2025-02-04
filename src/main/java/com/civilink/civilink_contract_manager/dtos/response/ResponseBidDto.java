@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ResponseBidDto {
-    private String bidId;
+    private long bidId;
     private String clientName;
     private String projectName;
     private String ActivityName;

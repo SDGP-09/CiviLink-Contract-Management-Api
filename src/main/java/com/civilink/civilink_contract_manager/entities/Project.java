@@ -24,9 +24,13 @@ public class Project {
     private String projectStatus;
     private String projectCategory;
 
-
+    // Relationship to Bid
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private  Project project;
+    @JoinColumn(name = "bid_id")  // Assuming each project is linked to one bid
+    private Bid bid;
+
+//    @ManyToOne
+//    @JoinColumn(name = "project_id")
+//    private  Project project;
 
 }
