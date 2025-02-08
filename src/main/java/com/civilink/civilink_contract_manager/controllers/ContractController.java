@@ -88,7 +88,7 @@ public class ContractController {
         );
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete-contract")
     public void deleteContract(
             @RequestBody RequestContractByIdDto requestContractByIdDto) {
         try {
@@ -143,7 +143,7 @@ public class ContractController {
         );
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete-contract-item")
     public void deleteContractItems(
             @RequestBody RequestContractItemsByIdDto requestContractItemsByIdDto) {
         try {

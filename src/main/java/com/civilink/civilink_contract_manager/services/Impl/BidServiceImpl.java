@@ -61,7 +61,7 @@ public class BidServiceImpl implements BidService {
 
     @Override
     public ResponseAddBidInvitationDto addBidInvitation(RequestAddBidInvitationDto requestAddBidInvitationDto) {
-        BidInvitation invitation = bidInvitationRepository.findById(requestAddBidInvitationDto.getBidInvitationId()).get();
+        BidInvitation invitation = bidInvitationRepository.findById(Long.parseLong(requestAddBidInvitationDto.getBidInvitationId())).get();
 
         Bid bid = bidRepository.findById(Long.valueOf(requestAddBidInvitationDto.getBidId())).get();
 

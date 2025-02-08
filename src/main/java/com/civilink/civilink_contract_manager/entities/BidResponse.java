@@ -29,6 +29,12 @@ public class BidResponse {
     private Contractor contractor;
 
 
+    // Add ManyToOne mapping to Bid
+    @ManyToOne
+    @JoinColumn(name = "bid_id") // Foreign key to Bid
+    private Bid bid;
+
+
 //    @OneToOne
 //    @JoinColumn(name = "bid_response_id")
 //    private BidResponse bidResponse;

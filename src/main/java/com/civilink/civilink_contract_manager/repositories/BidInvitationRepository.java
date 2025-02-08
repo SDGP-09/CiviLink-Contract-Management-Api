@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface BidInvitationRepository extends JpaRepository<BidInvitation, Long> {
 
 
-    Optional<BidInvitation> findById(String id);
+    Optional<BidInvitation> findById(long id);
 
     @Query("SELECT b FROM BidInvitation b WHERE b.id = :id AND (:status IS NULL OR b.status = :status)")
     List<BidInvitation> findByIdAndStatus(String id, String status);

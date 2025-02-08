@@ -48,7 +48,7 @@ public class BidInvitationServiceImpl implements BidInvitationService {
     @Override
     public ResponseBidItemDto createBidItem(RequestBidItemDto requestBidItemDto) {
 
-        BidInvitation invitation = bidInvitationRepository.findById("BID001").get();
+        BidInvitation invitation = bidInvitationRepository.findById(Long.parseLong("BID001")).get();
 
         BidItem bidItem = BidItem.builder().id(Long.parseLong(requestBidItemDto.getId()))
                 .name(requestBidItemDto.getName())
@@ -77,7 +77,7 @@ public class BidInvitationServiceImpl implements BidInvitationService {
 
     @Override
     public ResponseBidInvitationDto updateBidInvitation(RequestBidInvitationUpdateDto requestBidInvitationUpdateDto) {
-        BidInvitation existingBidInvitation = bidInvitationRepository.findById(requestBidInvitationUpdateDto.getId()).orElse(null);
+        BidInvitation existingBidInvitation = bidInvitationRepository.findById(Long.parseLong(requestBidInvitationUpdateDto.getId())).orElse(null);
 
         if (existingBidInvitation == null) {
             throw new BidInvitationNotFoundException("Bid invitation not found with id: " + requestBidInvitationUpdateDto.getId());
