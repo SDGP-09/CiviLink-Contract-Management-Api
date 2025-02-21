@@ -35,7 +35,7 @@ public class BidInvitationServiceImpl implements BidInvitationService {
                 .id(Long.parseLong(requestBidInvitationDto.getId()))
                 .title(requestBidInvitationDto.getTitle())
                 .status(requestBidInvitationDto.getStatus())
-                .bidItems(new ArrayList<>())
+
                 .createdBy(requestBidInvitationDto.getCreatedBy())
                 .description(requestBidInvitationDto.getDescription())
                 .build();
@@ -55,7 +55,7 @@ public class BidInvitationServiceImpl implements BidInvitationService {
                 .url(requestBidItemDto.getUrl())
                 .build();
 
-        invitation.getBidItems().add(bidItem);
+
 
         bidItemRepository.save(bidItem);
         bidInvitationRepository.save(invitation);
@@ -95,9 +95,7 @@ public class BidInvitationServiceImpl implements BidInvitationService {
             existingBidInvitation.setStatus(requestBidInvitationUpdateDto.getStatus());
         }
 
-        if (requestBidInvitationUpdateDto.getBidItems() != null) {
-            existingBidInvitation.setBidItems(requestBidInvitationUpdateDto.getBidItems());
-        }
+
 
         BidInvitation updatedBid = bidInvitationRepository.save(existingBidInvitation);
 

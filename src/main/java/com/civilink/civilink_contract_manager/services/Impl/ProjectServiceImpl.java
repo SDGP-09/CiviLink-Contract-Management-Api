@@ -26,7 +26,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void createProject(RequestProjectDto requestProjectDto) {
 
-        Client client = clientRepository.findById(Integer.valueOf(requestProjectDto.getClientId())).get();
+        Optional<Client> client1 = clientRepository.findById(Long.valueOf(Integer.valueOf(requestProjectDto.getId())));
+
+        if(client1.isPresent()) {
+            Client client = client1.get();
+        }
 
         Project project = Project.builder()
                 .projectCategory(requestProjectDto.getProjectCategory())
@@ -37,7 +41,6 @@ public class ProjectServiceImpl implements ProjectService {
                 .projectNumber(requestProjectDto.getProjectNumber())
                 .projectStatus(requestProjectDto.getProjectStatus())
                 .id(Long.parseLong(requestProjectDto.getId()))
-                .client(client)
                 .build();
 
         projectRepository.save(project);

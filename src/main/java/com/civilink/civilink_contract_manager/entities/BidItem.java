@@ -20,9 +20,9 @@ public class BidItem {
     private String description;
     private String url;
 
-    @ManyToOne
-    @JoinColumn(name = "bid_invitation_id")
-    private BidInvitation bidInvitation;
+//    @ManyToOne
+//    @JoinColumn(name = "bid_invitation_id")
+//    private BidInvitation bidInvitation;
 
 //    @ManyToOne
 //    @JoinColumn(name = "bid_item_id")

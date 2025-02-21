@@ -45,9 +45,8 @@ public class ConsultantServiceImpl implements ConsultantService {
         Consultant consultant = consultantRepository.findById(Long.valueOf(requestConsultantProjectDto.getConsultantId())).get();
         Project project = projectRepository.findById(Long.valueOf(requestConsultantProjectDto.getProjectId())).get();
 
-        consultant.getProjects().add(project);
 
-        project.setConsultant(consultant);
+
 
         projectRepository.save(project);
         consultantRepository.save(consultant);
@@ -68,7 +67,7 @@ public class ConsultantServiceImpl implements ConsultantService {
                     .stream()
                     .map(project -> projectRepository.save(project))
                     .toList();
-            consultant.setProjects(updatedProjects);
+
         }
 
         Consultant updatedConsultant = consultantRepository.save(consultant);

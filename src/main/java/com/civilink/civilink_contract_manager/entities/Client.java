@@ -22,14 +22,14 @@ public class Client {
     private String name;
     private String contact;
 
-    // This is the list of projects associated with this client
-    @OneToMany(mappedBy = "client")
-    private List<Project> projectList;
-
-    // Recursive reference, if you need it for hierarchical structure
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client; // Parent client (optional, only if needed)
+//    // This is the list of projects associated with this client
+//    @OneToMany(mappedBy = "client")
+//    private List<Project> projectList;
+//
+//    // Recursive reference, if you need it for hierarchical structure
+//    @ManyToOne
+//    @JoinColumn(name = "client_id")
+//    private Client client; // Parent client (optional, only if needed)
 
 
 

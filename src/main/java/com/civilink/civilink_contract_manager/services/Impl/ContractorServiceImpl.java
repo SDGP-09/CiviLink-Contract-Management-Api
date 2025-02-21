@@ -54,7 +54,7 @@ public class ContractorServiceImpl implements ContractorService {
                     .map(bidResponse -> bidResponsesRepository.save(bidResponse))
                     .toList();
 
-            contractor.setBidResponses(updatedBidResponses);
+
         }
 
         if (requestContractorUpdateDto.getPosts() != null){
@@ -62,7 +62,7 @@ public class ContractorServiceImpl implements ContractorService {
                     .stream()
                     .map(post -> postRepository.save(post))
                     .toList();
-            contractor.setPosts(updatedPosts);
+
         }
 
         Contractor updatedContractor = contractorRepository.save(contractor);

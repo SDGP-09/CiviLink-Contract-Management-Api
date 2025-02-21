@@ -19,9 +19,9 @@ public class ContractItems {
     private String url;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "contract_id") // Reference to Contract, NOT ContractItems
-    private Contract contract;
+//    @ManyToOne
+//    @JoinColumn(name = "contract_id") // Reference to Contract, NOT ContractItems
+//    private Contract contract;
 
 
 //    @ManyToOne

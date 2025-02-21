@@ -23,12 +23,12 @@ public class Contractor {
 
 
     // Add OneToMany relationship with BidResponse
-    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BidResponse> bidResponses;
-
-    // Add OneToMany relationship with Post
-    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts;
+//    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<BidResponse> bidResponses;
+//
+//    // Add OneToMany relationship with Post
+//    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Post> posts;
 
 
 //    @ManyToOne

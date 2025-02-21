@@ -27,22 +27,22 @@ public class Project {
     private String projectCategory;
 
     // Relationship to Bid
-    @ManyToOne
-    @JoinColumn(name = "bid_id")  // Assuming each project is linked to one bid
-    private Bid bid;
-
-    @ManyToOne
-    @JoinColumn(name = "consultant_id")  // Foreign key to link Project with Consultant
-    private Consultant consultant;  // Each project can be linked to one consultant
-
-    // A Project can have multiple Contracts
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contract> contracts;
-
-    //Add ManyToOne relationship to Client
-    @ManyToOne
-    @JoinColumn(name = "client_id") // Foreign key reference
-    private Client client;
+//    @ManyToOne
+//    @JoinColumn(name = "bid_id")  // Assuming each project is linked to one bid
+//    private Bid bid;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "consultant_id")  // Foreign key to link Project with Consultant
+//    private Consultant consultant;  // Each project can be linked to one consultant
+//
+//    // A Project can have multiple Contracts
+//    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Contract> contracts;
+//
+//    //Add ManyToOne relationship to Client
+//    @ManyToOne
+//    @JoinColumn(name = "client_id") // Foreign key reference
+//    private Client client;
 
 
 

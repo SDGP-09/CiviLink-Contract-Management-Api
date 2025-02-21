@@ -25,12 +25,12 @@ public class BidInvitation {
     private String createdBy;
     private String status;
 
-    @OneToMany(mappedBy = "bidInvitation") // This assumes BidItem has a field bidInvitation
-    private List<BidItem> bidItems = new ArrayList<>(); // Initialize the list to prevent NullPointerException
-
-    @ManyToOne
-    @JoinColumn(name = "bid_invitation_id")
-    private BidInvitation bidInvitation;
+//    @OneToMany(mappedBy = "bidInvitation") // This assumes BidItem has a field bidInvitation
+//    private List<BidItem> bidItems = new ArrayList<>(); // Initialize the list to prevent NullPointerException
+//
+//    @ManyToOne
+//    @JoinColumn(name = "bid_invitation_id")
+//    private BidInvitation bidInvitation;
 
 
 

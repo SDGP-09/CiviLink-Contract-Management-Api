@@ -24,15 +24,15 @@ public class BidResponse {
     private String url;
 
     // Corrected ManyToOne relationship to Contractor
-    @ManyToOne
-    @JoinColumn(name = "contractor_id") // Foreign key to Contractor
-    private Contractor contractor;
-
-
-    // Add ManyToOne mapping to Bid
-    @ManyToOne
-    @JoinColumn(name = "bid_id") // Foreign key to Bid
-    private Bid bid;
+//    @ManyToOne
+//    @JoinColumn(name = "contractor_id") // Foreign key to Contractor
+//    private Contractor contractor;
+//
+//
+//    // Add ManyToOne mapping to Bid
+//    @ManyToOne
+//    @JoinColumn(name = "bid_id") // Foreign key to Bid
+//    private Bid bid;
 
 
 //    @OneToOne

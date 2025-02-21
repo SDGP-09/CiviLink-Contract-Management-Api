@@ -22,8 +22,8 @@ public class Consultant {
     private String name;
     private String specializations;
 
-    @OneToMany(mappedBy = "consultant")  // This indicates a consultant can have multiple projects
-    private List<Project> projects;  // List of projects for this consultant
+//    @OneToMany(mappedBy = "consultant")  // This indicates a consultant can have multiple projects
+//    private List<Project> projects;  // List of projects for this consultant
 
 
 //    @ManyToOne

@@ -23,9 +23,9 @@ public class Post {
 
 
     // Corrected ManyToOne relationship to Contractor
-    @ManyToOne
-    @JoinColumn(name = "contractor_id") // Foreign key to Contractor
-    private Contractor contractor;
+//    @ManyToOne
+//    @JoinColumn(name = "contractor_id") // Foreign key to Contractor
+//    private Contractor contractor;
 
 
 //    @ManyToOne

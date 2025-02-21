@@ -28,25 +28,25 @@ public class ContractItemsServiceImpl implements ContractItemsService {
     @Override
     public void createContractItems(RequestContractItemsDto contractItemDto) {
 
-        Contract contract = contractRepository.findById(Integer.valueOf(contractItemDto.getContractId())).get();
+        Contract contract = contractRepository.findById(Long.valueOf(Integer.valueOf(contractItemDto.getContractId()))).get();
 
         ContractItems contractItems = ContractItems.builder()
                 .id(Long.parseLong(contractItemDto.getId()))
                 .description(contractItemDto.getDescription())
                 .url(contractItemDto.getUrl())
-                .contract(contract)
+
                 .build();
 
         contractItemsRepository.save(contractItems);
 
-        contract.getContractItems().add(contractItems);
+
         contractRepository.save(contract);
     }
 
 
     @Override
     public ResponseContractItemsDto updateContractItems(RequestContractItemsUpdateDto request) throws ContractItemsNotFoundException {
-        ContractItems contractItems = contractItemsRepository.findById(request.getId()).orElse(null);
+        ContractItems contractItems = contractItemsRepository.findById(Long.valueOf(request.getId())).orElse(null);
 
         if (contractItems == null) {
             throw new ContractItemsNotFoundException("ContractItems not found with the id of: " + request.getId());
@@ -60,7 +60,7 @@ public class ContractItemsServiceImpl implements ContractItemsService {
         if (request.getContract() != null) {
 
             Contract updatedContract = contractRepository.save(request.getContract());
-            contractItems.setContract(updatedContract);
+
         }
 
         ContractItems updatedContractItems = contractItemsRepository.save(contractItems);
@@ -69,7 +69,7 @@ public class ContractItemsServiceImpl implements ContractItemsService {
 
     @Override
     public ResponseContractItemsDto findById(RequestContractItemsByIdDto request) throws ContractItemsNotFoundException {
-        ContractItems contractItems = contractItemsRepository.findById(request.getId()).orElse(null);
+        ContractItems contractItems = contractItemsRepository.findById(Long.valueOf(request.getId())).orElse(null);
         if (contractItems == null) {
             throw new ContractItemsNotFoundException("ContractItems not found with the id of: " + request.getId());
         }
@@ -79,7 +79,7 @@ public class ContractItemsServiceImpl implements ContractItemsService {
     @Override
     public ResponseContractItemsAllDto findAll(RequestContractItemsDto requestDto) {
         if (requestDto.getId() != null) {
-            ContractItems contractItems = contractItemsRepository.findById(requestDto.getId()).orElse(null);
+            ContractItems contractItems = contractItemsRepository.findById(Long.valueOf(requestDto.getId())).orElse(null);
             ContractItems[] array = {contractItems};
             return new ResponseContractItemsAllDto(array);
         } else {
@@ -102,7 +102,7 @@ public class ContractItemsServiceImpl implements ContractItemsService {
 
     @Override
     public void deleteContractItems(RequestContractItemsByIdDto request) throws ContractItemsNotFoundException {
-        ContractItems contractItems = contractItemsRepository.findById(request.getId()).orElse(null);
+        ContractItems contractItems = contractItemsRepository.findById(Long.valueOf(request.getId())).orElse(null);
         if (contractItems == null) {
             throw new ContractItemsNotFoundException("ContractItems not found with the id of: " + request.getId());
         }

@@ -27,6 +27,8 @@ public class ContractController {
     public ResponseEntity<StandardResponse> createContract(@RequestBody RequestContractDto contractDto) {
         contractService.createContract(contractDto);
 
+        System.out.println(contractDto.getProjectId());
+
         return new ResponseEntity<>(
                 new StandardResponse(201,"Contract Created",contractDto.getId())
                 , HttpStatus.CREATED);

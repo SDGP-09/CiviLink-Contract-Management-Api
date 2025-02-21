@@ -42,21 +42,19 @@ public class BidServiceImpl implements BidService {
         Bid bid = Bid.builder()
                 .id(Long.parseLong(requestBidDto.getId()))
                 .clientName(requestBidDto.getClientName())
-                .bidResponds(new ArrayList<>())
+
                 .activityName(requestBidDto.getActivityName())
-                .bidInvitation(null)
-                .project(project)
+
+
                 .build();
 
         bidRepository.save(bid);
 
-        project.setBid(bid);
+
         projectRepository.save(project);
 
-        return new ResponseBidDto(bid.getId(),
-                bid.getClientName(),
-                bid.getProject().getProjectName(),
-                bid.getActivityName());
+
+        return null;
     }
 
     @Override
@@ -65,7 +63,7 @@ public class BidServiceImpl implements BidService {
 
         Bid bid = bidRepository.findById(Long.valueOf(requestAddBidInvitationDto.getBidId())).get();
 
-        bid.setBidInvitation(invitation);
+
         bidRepository.save(bid);
 
         return new ResponseAddBidInvitationDto(bid.getId(), bid,invitation);
@@ -82,12 +80,7 @@ public class BidServiceImpl implements BidService {
         bid.setActivityName(requestAllBidDto.getActivityName());
 
         // Get the associated Project object
-        Project project = bid.getProject();  // Access the Project object from Bid
-        if (project != null) {
-            project.setProjectName(requestAllBidDto.getProjectName());  // Set the projectName on the Project object
-        }
-        // Now set the project object on the Bid
-        bid.setProject(project);
+
 
 
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();

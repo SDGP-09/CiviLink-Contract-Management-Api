@@ -4,5 +4,5 @@ import com.civilink.civilink_contract_manager.entities.ContractItems;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface ContractItemsRepository extends JpaRepository<ContractItems, String> {
+public interface ContractItemsRepository extends JpaRepository<ContractItems, Long> {
 }
