@@ -59,7 +59,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setProjectDescription(requestProjectUpdateDto.getProjectDescription());
         project.setProjectNumber(requestProjectUpdateDto.getProjectNumber());
         project.setProjectStatus(requestProjectUpdateDto.getProjectStatus());
-        project.setId(Long.parseLong(requestProjectFindByIdDto.getId()));
+        project.setId(Long.parseLong(String.valueOf(requestProjectFindByIdDto.getId())));
         projectRepository.save(project);
 
 
