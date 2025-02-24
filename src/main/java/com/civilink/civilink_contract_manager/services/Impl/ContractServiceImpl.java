@@ -7,6 +7,7 @@ import com.civilink.civilink_contract_manager.dtos.response.ResponseContractAllD
 import com.civilink.civilink_contract_manager.dtos.response.ResponseContractDto;
 import com.civilink.civilink_contract_manager.entities.Contract;
 import com.civilink.civilink_contract_manager.entities.ContractItems;
+import com.civilink.civilink_contract_manager.entities.Contractor;
 import com.civilink.civilink_contract_manager.entities.Project;
 import com.civilink.civilink_contract_manager.exception.ContractNotFoundException;
 import com.civilink.civilink_contract_manager.repositories.ContractItemsRepository;
@@ -48,6 +49,8 @@ public class ContractServiceImpl implements ContractService {
         // Add contract to Project's list
 
 
+        //Contractor contractor = new Contractor(contractDto.getId(),contractDto.getDescription(),)
+
         projectRepository.save(project);
 
     }
@@ -62,15 +65,12 @@ public class ContractServiceImpl implements ContractService {
 
 
 
-
-
         if (requestContractUpdateDto.getContractItems() != null) {
 
             List<ContractItems> updatedItems = requestContractUpdateDto.getContractItems()
                     .stream()
                     .map(contractItem -> contractItemsRepository.save(contractItem))
                     .toList();
-
         }
 
 

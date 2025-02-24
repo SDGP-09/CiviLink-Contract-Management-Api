@@ -22,6 +22,7 @@ public class Contractor {
     private String contact;
 
 
+
     // Add OneToMany relationship with BidResponse
 //    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<BidResponse> bidResponses;

@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 
 public class RequestContractorUpdateDto {
-    private String id;
+    private Long id;
     private String name;
     private String contact;
     private List<BidResponse> bidResponses;

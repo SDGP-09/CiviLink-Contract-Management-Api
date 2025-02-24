@@ -32,13 +32,16 @@ public class ContractorServiceImpl implements ContractorService {
     @Override
     public void createContractor(RequestContractorDto requestContractorDto) {
         Contractor contractor = Contractor.builder()
-                .id(Long.parseLong(requestContractorDto.getId()))
                 .name(requestContractorDto.getName())
                 .contact(requestContractorDto.getContact())
                 .build();
 
         contractorRepository.save(contractor);
     }
+
+
+
+
 
     @Override
     public ResponseContractorDto updateContractor(RequestContractorUpdateDto requestContractorUpdateDto) throws ContractorNotFoundException {
@@ -84,30 +87,37 @@ public class ContractorServiceImpl implements ContractorService {
     @Override
     public ResponseContractorAllDto findAll(RequestContractorDto requestContractorDto) {
 
-        if (requestContractorDto.getId() != null){
-            Contractor contractor = contractorRepository.findById(Long.valueOf(requestContractorDto.getId())).orElse(null);
-            Contractor[] contractors = {contractor};
-            return new ResponseContractorAllDto(contractors);
-
-        } else {
-
-
-            Contractor contractor = Contractor.builder()
-                    .name(requestContractorDto.getName())
-                    .contact(requestContractorDto.getContact())
-                    .build();
-
-            ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
-
-            Example<Contractor> example = Example.of(contractor, matcher);
-            List<Contractor> contractors = contractorRepository.findAll(example);
-            Contractor[] toReturn = new Contractor[contractors.size()];
-            toReturn = contractors.toArray(toReturn);
-
-
-            return new ResponseContractorAllDto(toReturn);
+        //  If ID is provided, fetch by ID
+        if (requestContractorDto.getId() != null) {
+            Contractor contractor = contractorRepository.findById(requestContractorDto.getId()).orElse(null);
+            if (contractor == null) {
+                return new ResponseContractorAllDto(new Contractor[0]); // Return empty array if not found
+            }
+            return new ResponseContractorAllDto(new Contractor[]{contractor});
         }
+
+        //  If no filters are provided, return all contractors
+        if (requestContractorDto.getName() == null && requestContractorDto.getContact() == null) {
+            List<Contractor> allContractors = contractorRepository.findAll();
+            return new ResponseContractorAllDto(allContractors.toArray(new Contractor[0]));
+        }
+
+        //  If filters are provided, search using ExampleMatcher
+        Contractor contractor = Contractor.builder()
+                .name(requestContractorDto.getName())
+                .contact(requestContractorDto.getContact())
+                .build();
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING); // Allows partial matches
+
+        Example<Contractor> example = Example.of(contractor, matcher);
+        List<Contractor> contractors = contractorRepository.findAll(example);
+
+        return new ResponseContractorAllDto(contractors.toArray(new Contractor[0]));
     }
+
 
     @Override
     public void deleteContractor(RequestContractorByIdDto requestContractorByIdDto) throws ContractorNotFoundException {
