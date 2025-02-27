@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ResponseAddBidInvitationDto {
-    private String bidId;
+    private long bidId;
     private Bid bid;
     private BidInvitation bidInvitation;
 }

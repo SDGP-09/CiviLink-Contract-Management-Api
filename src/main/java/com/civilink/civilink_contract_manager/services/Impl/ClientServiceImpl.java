@@ -32,7 +32,7 @@ public class ClientServiceImpl implements ClientService {
     public void createClient(RequestClientDto requestClientDto) {
 
         Client client = Client.builder()
-                .id(requestClientDto.getId())
+                .id(Long.parseLong(requestClientDto.getId()))
                 .name(requestClientDto.getName())
                 .contact(requestClientDto.getContact())
                 .build();
@@ -43,18 +43,18 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void addProjectToClient(RequestClientProjectDto requestClientProjectDto) {
-        Project project = projectRepository.findById(requestClientProjectDto.getProjectId()).get();
+        Project project = projectRepository.findById(Long.valueOf(requestClientProjectDto.getProjectId())).get();
 
-        Client client = clientRepository.findById(requestClientProjectDto.getClientId()).get();
+        Client client = clientRepository.findById(Long.valueOf(Integer.valueOf(requestClientProjectDto.getClientId()))).get();
 
-        client.getProjectList().add(project);
+
 
         clientRepository.save(client);
     }
 
     @Override
     public ResponseClientDto updateClient(RequestClientUpdateDTO requestClientUpdateDTO) throws ClientNotFoundException {
-        Client client = clientRepository.findById(requestClientUpdateDTO.getId()).orElse(null);
+        Client client = clientRepository.findById(Long.valueOf(Integer.valueOf(requestClientUpdateDTO.getId()))).orElse(null);
 
         if (client == null){
             throw new ClientNotFoundException("Client not found with the id of: " + requestClientUpdateDTO.getId());
@@ -67,7 +67,7 @@ public class ClientServiceImpl implements ClientService {
                     .stream()
                     .map(project -> projectRepository.save(project))
                     .toList();
-            client.setProjectList(updatedProjects);
+
         }
 
         Client updatedClient = clientRepository.save(client);
@@ -76,7 +76,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ResponseClientDto findClientById(RequestClientByIdDto requestClientByIdDto) throws ClientNotFoundException {
-        Client client = clientRepository.findById(requestClientByIdDto.getId()).orElse(null);
+        Client client = clientRepository.findById(Long.valueOf(Integer.valueOf(requestClientByIdDto.getId()))).orElse(null);
         if (client == null) throw new ClientNotFoundException("Client not found with the id of: " + requestClientByIdDto.getId());
 
         return new ResponseClientDto(client);
@@ -87,7 +87,7 @@ public class ClientServiceImpl implements ClientService {
 
         if (requestClientDto.getId() != null) {
 
-            Client client = clientRepository.findById(requestClientDto.getId()).orElse(null);
+            Client client = clientRepository.findById(Long.valueOf(Integer.valueOf(requestClientDto.getId()))).orElse(null);
             Client[] clients = {client};
 
 
@@ -113,7 +113,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void deleteClient(RequestClientByIdDto requestClientByIdDto) throws ClientNotFoundException {
-        Client client = clientRepository.findById(requestClientByIdDto.getId()).orElse(null);
+        Client client = clientRepository.findById(Long.valueOf(Integer.valueOf(requestClientByIdDto.getId()))).orElse(null);
 
         if (client == null){
             throw new ClientNotFoundException("Client not found with the id of: " + requestClientByIdDto.getId());

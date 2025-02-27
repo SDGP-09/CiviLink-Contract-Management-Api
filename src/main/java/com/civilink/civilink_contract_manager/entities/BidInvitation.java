@@ -1,30 +1,37 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Document("bidInvitations")
+
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class BidInvitation {
+
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String title;
     private String description;
     private String createdBy;
     private String status;
 
-    @DBRef
-    private List<BidItem> bidItems;
+//    @OneToMany(mappedBy = "bidInvitation") // This assumes BidItem has a field bidInvitation
+//    private List<BidItem> bidItems = new ArrayList<>(); // Initialize the list to prevent NullPointerException
+//
+//    @ManyToOne
+//    @JoinColumn(name = "bid_invitation_id")
+//    private BidInvitation bidInvitation;
+
 
 
 }

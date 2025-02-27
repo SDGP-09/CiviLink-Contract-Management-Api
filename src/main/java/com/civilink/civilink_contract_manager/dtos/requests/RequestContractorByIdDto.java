@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class RequestContractorByIdDto {
-    private String id;
+    private Long id;
 }

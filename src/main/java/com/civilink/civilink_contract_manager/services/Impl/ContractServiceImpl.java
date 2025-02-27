@@ -7,6 +7,7 @@ import com.civilink.civilink_contract_manager.dtos.response.ResponseContractAllD
 import com.civilink.civilink_contract_manager.dtos.response.ResponseContractDto;
 import com.civilink.civilink_contract_manager.entities.Contract;
 import com.civilink.civilink_contract_manager.entities.ContractItems;
+import com.civilink.civilink_contract_manager.entities.Contractor;
 import com.civilink.civilink_contract_manager.entities.Project;
 import com.civilink.civilink_contract_manager.exception.ContractNotFoundException;
 import com.civilink.civilink_contract_manager.repositories.ContractItemsRepository;
@@ -31,19 +32,24 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public void createContract(RequestContractDto contractDto) {
 
-        Project project = projectRepository.findById(contractDto.getProjectId()).get();
+        Project project = projectRepository.findById(Long.valueOf(contractDto.getProjectId()))
+                .orElseThrow(() -> new RuntimeException("Project not found with ID: " + contractDto.getProjectId()));
+
 
         Contract contract = Contract.builder()
                 .id(contractDto.getId())
                 .description(contractDto.getDescription())
                 .contractDate(contractDto.getContractDate())
-                .project(project)
-                .contracts(null)
+
+
                 .build();
 
         contractRepository.save(contract);
 
-        project.setContract(contract);
+        // Add contract to Project's list
+
+
+        //Contractor contractor = new Contractor(contractDto.getId(),contractDto.getDescription(),)
 
         projectRepository.save(project);
 
@@ -51,18 +57,12 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public ResponseContractDto updateContract(RequestContractUpdateDto requestContractUpdateDto) throws ContractNotFoundException {
-        Contract contract = contractRepository.findById(requestContractUpdateDto.getId()).orElse(null);
+        Contract contract = contractRepository.findById(Long.valueOf(Integer.valueOf(requestContractUpdateDto.getId()))).orElse(null);
 
         if (contract == null) {
             throw new ContractNotFoundException("Contract not found with the id of: " + requestContractUpdateDto.getId());
         }
 
-
-        if (requestContractUpdateDto.getProject() != null) {
-
-            Project updatedProject = projectRepository.save(requestContractUpdateDto.getProject());
-            contract.setProject(updatedProject);
-        }
 
 
         if (requestContractUpdateDto.getContractItems() != null) {
@@ -71,7 +71,6 @@ public class ContractServiceImpl implements ContractService {
                     .stream()
                     .map(contractItem -> contractItemsRepository.save(contractItem))
                     .toList();
-            contract.setContracts(updatedItems);
         }
 
 
@@ -92,7 +91,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public ResponseContractDto findById(RequestContractByIdDto requestContractByIdDto) throws ContractNotFoundException {
-        Contract contract = contractRepository.findById(requestContractByIdDto.getId()).orElse(null);
+        Contract contract = contractRepository.findById(Long.valueOf(Integer.valueOf(requestContractByIdDto.getId()))).orElse(null);
         if (contract == null) {
             throw new ContractNotFoundException("Contract not found with the id of: " + requestContractByIdDto.getId());
         }
@@ -103,8 +102,8 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public ResponseContractAllDto findAll(RequestContractDto requestContractDto) {
 
-        if (requestContractDto.getId() != null) {
-            Contract contract = contractRepository.findById(requestContractDto.getId()).orElse(null);
+        if (false) {
+            Contract contract = contractRepository.findById((long) requestContractDto.getId()).orElse(null);
             Contract[] contracts = { contract };
             return new ResponseContractAllDto(contracts);
         } else {
@@ -127,7 +126,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public void deleteContract(RequestContractByIdDto requestContractByIdDto) throws ContractNotFoundException {
-        Contract contract = contractRepository.findById(requestContractByIdDto.getId()).orElse(null);
+        Contract contract = contractRepository.findById(Long.valueOf(Integer.valueOf(requestContractByIdDto.getId()))).orElse(null);
         if (contract == null) {
             throw new ContractNotFoundException("Contract not found with the id of: " + requestContractByIdDto.getId());
         } else {

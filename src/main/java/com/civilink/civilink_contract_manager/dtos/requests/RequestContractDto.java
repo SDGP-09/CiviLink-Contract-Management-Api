@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class RequestContractDto {
-    private String id;
+    private long id;
     private String projectId;
     private String description;
     private String contractDate;

@@ -1,13 +1,13 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("Posts")
+
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -15,13 +15,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 public class Post {
-
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String title;
     private String date;
 
 
+    // Corrected ManyToOne relationship to Contractor
+//    @ManyToOne
+//    @JoinColumn(name = "contractor_id") // Foreign key to Contractor
+//    private Contractor contractor;
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "post_id")
+//    private Post post;
 
 
 }

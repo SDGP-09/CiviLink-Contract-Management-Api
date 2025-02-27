@@ -13,10 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000") // Allow frontend to call backend
 @RestController
 @RequestMapping("/contractor")
 @RequiredArgsConstructor
-public class ContractorController {
+    public class ContractorController {
 
     private final ContractorService contractorService;
 
@@ -76,18 +77,22 @@ public class ContractorController {
     }
 
 
-    public void deleteContractor(
+    @DeleteMapping("/delete")
+    public ResponseEntity<StandardResponse> deleteContractor(
             @RequestBody RequestContractorByIdDto requestContractorByIdDto
-    ){
-
+    ) {
         try {
             contractorService.deleteContractor(requestContractorByIdDto);
-        } catch (ContractorNotFoundException e){
-            System.out.println(e);
+            return new ResponseEntity<>(
+                    new StandardResponse(200, "Contractor deleted successfully", null),
+                    HttpStatus.OK
+            );
+        } catch (ContractorNotFoundException e) {
+            return new ResponseEntity<>(
+                    new StandardResponse(404, e.getMessage(), null),
+                    HttpStatus.NOT_FOUND
+            );
         }
-        
-
     }
-
 
 }

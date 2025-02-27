@@ -35,37 +35,35 @@ public class BidServiceImpl implements BidService {
     @Override
     public ResponseBidDto createBid(RequestBidDto requestBidDto) {
 
-        Project project = projectRepository.findById(requestBidDto.getProjectId()).get();
+        Project project = projectRepository.findById(Long.valueOf(requestBidDto.getProjectId())).get();
 
 
 
         Bid bid = Bid.builder()
-                .id(requestBidDto.getId())
+                .id(Long.parseLong(requestBidDto.getId()))
                 .clientName(requestBidDto.getClientName())
-                .bidResponds(new ArrayList<>())
+
                 .activityName(requestBidDto.getActivityName())
-                .bidInvitation(null)
-                .project(project)
+
+
                 .build();
 
         bidRepository.save(bid);
 
-        project.setBid(bid);
+
         projectRepository.save(project);
 
-        return new ResponseBidDto(bid.getId(),
-                bid.getClientName(),
-                bid.getProject().getProjectName(),
-                bid.getActivityName());
+
+        return null;
     }
 
     @Override
     public ResponseAddBidInvitationDto addBidInvitation(RequestAddBidInvitationDto requestAddBidInvitationDto) {
-        BidInvitation invitation = bidInvitationRepository.findById(requestAddBidInvitationDto.getBidInvitationId()).get();
+        BidInvitation invitation = bidInvitationRepository.findById(Long.parseLong(requestAddBidInvitationDto.getBidInvitationId())).get();
 
-        Bid bid = bidRepository.findById(requestAddBidInvitationDto.getBidId()).get();
+        Bid bid = bidRepository.findById(Long.valueOf(requestAddBidInvitationDto.getBidId())).get();
 
-        bid.setBidInvitation(invitation);
+
         bidRepository.save(bid);
 
         return new ResponseAddBidInvitationDto(bid.getId(), bid,invitation);
@@ -77,10 +75,13 @@ public class BidServiceImpl implements BidService {
 
 
         Bid bid = new Bid();
-        bid.setBidId(requestAllBidDto.getBidId());
+        bid.setId(Long.parseLong(requestAllBidDto.getBidId()));
         bid.setClientName(requestAllBidDto.getClientName());
-        bid.setProjectName(requestAllBidDto.getProjectName());
         bid.setActivityName(requestAllBidDto.getActivityName());
+
+        // Get the associated Project object
+
+
 
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
 

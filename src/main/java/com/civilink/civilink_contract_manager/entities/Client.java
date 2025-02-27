@@ -1,26 +1,37 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 
 import java.util.List;
 
-@Document("clients")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
+
 public class Client {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String name;
     private String contact;
 
-    @DBRef
-    private List<Project> projectList;
+//    // This is the list of projects associated with this client
+//    @OneToMany(mappedBy = "client")
+//    private List<Project> projectList;
+//
+//    // Recursive reference, if you need it for hierarchical structure
+//    @ManyToOne
+//    @JoinColumn(name = "client_id")
+//    private Client client; // Parent client (optional, only if needed)
+
+
+
+
 }

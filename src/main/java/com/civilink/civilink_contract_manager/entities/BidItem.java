@@ -1,22 +1,31 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "bidItems")
+
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class BidItem {
-
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String name;
     private String description;
     private String url;
+
+//    @ManyToOne
+//    @JoinColumn(name = "bid_invitation_id")
+//    private BidInvitation bidInvitation;
+
+//    @ManyToOne
+//    @JoinColumn(name = "bid_item_id")
+//    private BidItem bidItem;
+
 }

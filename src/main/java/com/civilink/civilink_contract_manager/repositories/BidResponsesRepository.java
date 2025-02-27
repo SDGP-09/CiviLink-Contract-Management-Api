@@ -1,7 +1,8 @@
 package com.civilink.civilink_contract_manager.repositories;
 
 import com.civilink.civilink_contract_manager.entities.BidResponse;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BidResponsesRepository extends MongoRepository<BidResponse, String> {
+
+public interface BidResponsesRepository extends JpaRepository<BidResponse, Long> {
 }

@@ -1,17 +1,15 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 
 import java.util.List;
 
-@Document("bidResponses")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -20,16 +18,26 @@ import java.util.List;
 
 public class BidResponse {
     @Id
-    private String id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String date;
     private String url;
 
-    @DBRef
-    private List<BidInvitation> bidInvitations;
+    // Corrected ManyToOne relationship to Contractor
+//    @ManyToOne
+//    @JoinColumn(name = "contractor_id") // Foreign key to Contractor
+//    private Contractor contractor;
+//
+//
+//    // Add ManyToOne mapping to Bid
+//    @ManyToOne
+//    @JoinColumn(name = "bid_id") // Foreign key to Bid
+//    private Bid bid;
 
-    @DBRef
-    private List<BidItem> bidItems;
+
+//    @OneToOne
+//    @JoinColumn(name = "bid_response_id")
+//    private BidResponse bidResponse;
 
 
 }
