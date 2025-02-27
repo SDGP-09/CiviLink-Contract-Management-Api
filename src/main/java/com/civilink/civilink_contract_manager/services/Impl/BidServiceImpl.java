@@ -75,6 +75,7 @@ public class BidServiceImpl implements BidService {
 
 
         Bid bid = new Bid();
+
         bid.setId(Long.parseLong(requestAllBidDto.getBidId()));
         bid.setClientName(requestAllBidDto.getClientName());
         bid.setActivityName(requestAllBidDto.getActivityName());
@@ -82,6 +83,11 @@ public class BidServiceImpl implements BidService {
         // Get the associated Project object
 
 
+
+
+        
+        bid.setProjectName(requestAllBidDto.getProjectName());
+        
 
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
 

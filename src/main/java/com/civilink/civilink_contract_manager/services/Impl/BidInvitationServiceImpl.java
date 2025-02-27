@@ -5,7 +5,10 @@ import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitation
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitationUpdateDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidItemDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseAllBidInvitationDto;
+
 import com.civilink.civilink_contract_manager.dtos.requests.RequestDeleteBidInvitationDto;
+
+
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidItemDto;
 import com.civilink.civilink_contract_manager.entities.BidInvitation;
@@ -77,6 +80,7 @@ public class BidInvitationServiceImpl implements BidInvitationService {
 
     @Override
     public ResponseBidInvitationDto updateBidInvitation(RequestBidInvitationUpdateDto requestBidInvitationUpdateDto) {
+
         BidInvitation existingBidInvitation = bidInvitationRepository.findById(Long.parseLong(requestBidInvitationUpdateDto.getId())).orElse(null);
 
         if (existingBidInvitation == null) {
@@ -97,10 +101,14 @@ public class BidInvitationServiceImpl implements BidInvitationService {
 
 
 
+        
+
+
         BidInvitation updatedBid = bidInvitationRepository.save(existingBidInvitation);
 
 
         return new ResponseBidInvitationDto(updatedBid);
+
 
     }
 
@@ -111,3 +119,7 @@ public class BidInvitationServiceImpl implements BidInvitationService {
         }
     }
 }
+
+  
+
+

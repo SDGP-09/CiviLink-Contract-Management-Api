@@ -16,4 +16,7 @@ public interface BidInvitationRepository extends JpaRepository<BidInvitation, Lo
     @Query("SELECT b FROM BidInvitation b WHERE b.id = :id AND (:status IS NULL OR b.status = :status)")
     List<BidInvitation> findByIdAndStatus(String id, String status);
 
+    @Query("{ 'id': ?0, $or: [ { 'status': ?1 }, { ?1: null } ] }")
+    List<BidInvitation> findByIdAndStatus(String id, String status);
+
 }
