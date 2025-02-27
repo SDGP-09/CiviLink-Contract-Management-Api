@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class RequestProjectUpdateDto {
-    private String id;
+    private Long id;
     private int projectNumber;
     private String projectName;
     private String projectDescription;

@@ -11,7 +11,7 @@ public class RequestProjectDto {
 
 
     private String id;
-    private int projectNumber;
+    private Integer projectNumber;
     private String projectName;
     private String projectDescription;
     private String projectStartDate;

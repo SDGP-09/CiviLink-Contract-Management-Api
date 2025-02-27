@@ -5,6 +5,10 @@ import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitation
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitationUpdateDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidItemDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseAllBidInvitationDto;
+
+import com.civilink.civilink_contract_manager.dtos.requests.RequestDeleteBidInvitationDto;
+
+
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidItemDto;
 import com.civilink.civilink_contract_manager.entities.BidInvitation;
@@ -31,10 +35,10 @@ public class BidInvitationServiceImpl implements BidInvitationService {
     public ResponseBidInvitationDto createBidInvitation(RequestBidInvitationDto requestBidInvitationDto) {
 
         BidInvitation bidInvitation = BidInvitation.builder()
-                .id(requestBidInvitationDto.getId())
+                .id(Long.parseLong(requestBidInvitationDto.getId()))
                 .title(requestBidInvitationDto.getTitle())
                 .status(requestBidInvitationDto.getStatus())
-                .bidItems(new ArrayList<>())
+
                 .createdBy(requestBidInvitationDto.getCreatedBy())
                 .description(requestBidInvitationDto.getDescription())
                 .build();
@@ -47,14 +51,14 @@ public class BidInvitationServiceImpl implements BidInvitationService {
     @Override
     public ResponseBidItemDto createBidItem(RequestBidItemDto requestBidItemDto) {
 
-        BidInvitation invitation = bidInvitationRepository.findById("BID001").get();
+        BidInvitation invitation = bidInvitationRepository.findById(Long.parseLong("BID001")).get();
 
-        BidItem bidItem = BidItem.builder().id(requestBidItemDto.getId())
+        BidItem bidItem = BidItem.builder().id(Long.parseLong(requestBidItemDto.getId()))
                 .name(requestBidItemDto.getName())
                 .url(requestBidItemDto.getUrl())
                 .build();
 
-        invitation.getBidItems().add(bidItem);
+
 
         bidItemRepository.save(bidItem);
         bidInvitationRepository.save(invitation);
@@ -76,31 +80,46 @@ public class BidInvitationServiceImpl implements BidInvitationService {
 
     @Override
     public ResponseBidInvitationDto updateBidInvitation(RequestBidInvitationUpdateDto requestBidInvitationUpdateDto) {
-        BidInvitation existingBidInvitation = bidInvitationRepository.findById(requestBidInvitationUpdateDto.getId()).orElse(null);
 
-        if (existingBidInvitation == null){
+        BidInvitation existingBidInvitation = bidInvitationRepository.findById(Long.parseLong(requestBidInvitationUpdateDto.getId())).orElse(null);
+
+        if (existingBidInvitation == null) {
             throw new BidInvitationNotFoundException("Bid invitation not found with id: " + requestBidInvitationUpdateDto.getId());
         }
 
-        if (requestBidInvitationUpdateDto.getTitle() != null){
+        if (requestBidInvitationUpdateDto.getTitle() != null) {
             existingBidInvitation.setTitle(requestBidInvitationUpdateDto.getTitle());
         }
 
-        if (requestBidInvitationUpdateDto.getDescription() != null){
+        if (requestBidInvitationUpdateDto.getDescription() != null) {
             existingBidInvitation.setDescription(requestBidInvitationUpdateDto.getDescription());
         }
 
-        if (requestBidInvitationUpdateDto.getStatus() != null){
+        if (requestBidInvitationUpdateDto.getStatus() != null) {
             existingBidInvitation.setStatus(requestBidInvitationUpdateDto.getStatus());
         }
 
-        if (requestBidInvitationUpdateDto.getBidItems() != null) {
-            existingBidInvitation.setBidItems(requestBidInvitationUpdateDto.getBidItems());
-        }
+
+
+        
+
 
         BidInvitation updatedBid = bidInvitationRepository.save(existingBidInvitation);
 
 
         return new ResponseBidInvitationDto(updatedBid);
+
+
+    }
+
+    @Override
+    public void deleteBidInvitation(RequestDeleteBidInvitationDto requestDeleteBidInvitationDto) {
+        if (bidInvitationRepository.existsById(Long.valueOf(requestDeleteBidInvitationDto.getId()))){
+            bidInvitationRepository.deleteById(Long.valueOf(requestDeleteBidInvitationDto.getId()));
+        }
     }
 }
+
+  
+
+

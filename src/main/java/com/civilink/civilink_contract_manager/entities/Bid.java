@@ -1,32 +1,40 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
+import lombok.*;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
-@Document("Bid")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 public class Bid {
-
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String clientName;
     private String activityName;
 
-    @DBRef
-    private BidInvitation bidInvitation;
+//    @ManyToOne
+//    @JoinColumn(name = "project_id")  // Foreign key column for the relationship
+//    private Project project;  // This defines the relationship between Bid and Project
+//
+//    // Add the relationship to BidInvitation
+//    @ManyToOne
+//    @JoinColumn(name = "bid_invitation_id") // Foreign key column for the relationship
+//    private BidInvitation bidInvitation;  // This defines the relationship between Bid and BidInvitation
+//
+//    // List to hold BidResponse objects
+//    @OneToMany(mappedBy = "bid")
+//    private List<BidResponse> bidResponds = new ArrayList<>();  // Proper initialization
 
-    private List<String> bidResponds;
 
-    @DBRef
-    private Project project;
+//    @OneToOne
+//    @JoinColumn(name = "bid_id")
+//    private Bid bid;
+
 }

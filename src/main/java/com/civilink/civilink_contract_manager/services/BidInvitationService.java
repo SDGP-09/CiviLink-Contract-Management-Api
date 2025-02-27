@@ -5,6 +5,10 @@ import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitation
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidInvitationUpdateDto;
 import com.civilink.civilink_contract_manager.dtos.requests.RequestBidItemDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseAllBidInvitationDto;
+
+import com.civilink.civilink_contract_manager.dtos.requests.RequestDeleteBidInvitationDto;
+
+
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidInvitationDto;
 import com.civilink.civilink_contract_manager.dtos.response.ResponseBidItemDto;
 
@@ -16,6 +20,11 @@ public interface BidInvitationService {
     public ResponseAllBidInvitationDto sendAllBidInvitation(RequestAllBidInvitationDto requestAllBidInvitationDto);
 
     public ResponseBidInvitationDto updateBidInvitation(RequestBidInvitationUpdateDto requestBidInvitationUpdateDto);
+
+
+
+
+    public void deleteBidInvitation(RequestDeleteBidInvitationDto requestDeleteBidInvitationDto);
 
 
 }

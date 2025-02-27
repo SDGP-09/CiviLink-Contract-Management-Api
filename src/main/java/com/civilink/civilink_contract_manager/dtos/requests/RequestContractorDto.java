@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class RequestContractorDto {
-    private String id;
+    private Long id;
     private String name;
     private String contact;
 }

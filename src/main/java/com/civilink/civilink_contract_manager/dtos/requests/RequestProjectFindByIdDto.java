@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class RequestProjectFindByIdDto {
-    private String id;
+    private Long id;
 }

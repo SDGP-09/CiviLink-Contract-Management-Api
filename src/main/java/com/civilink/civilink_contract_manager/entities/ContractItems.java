@@ -1,25 +1,31 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("contract_items")
+
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 public class ContractItems {
-
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String url;
     private String description;
 
-    @DBRef
-    private Contract contract;
+//    @ManyToOne
+//    @JoinColumn(name = "contract_id") // Reference to Contract, NOT ContractItems
+//    private Contract contract;
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "contract_items_id")
+//    private ContractItems contractItems;
+
 }

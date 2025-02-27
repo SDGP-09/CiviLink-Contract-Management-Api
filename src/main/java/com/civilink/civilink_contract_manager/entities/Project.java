@@ -1,22 +1,23 @@
 package com.civilink.civilink_contract_manager.entities;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("projects")
+import java.util.List;
+
+
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 public class Project {
-
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private int projectNumber;
     private String projectName;
     private String projectDescription;
@@ -25,15 +26,24 @@ public class Project {
     private String projectStatus;
     private String projectCategory;
 
-    @DBRef
-    private Bid bid;
+    // Relationship to Bid
+//    @ManyToOne
+//    @JoinColumn(name = "bid_id")  // Assuming each project is linked to one bid
+//    private Bid bid;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "consultant_id")  // Foreign key to link Project with Consultant
+//    private Consultant consultant;  // Each project can be linked to one consultant
+//
+//    // A Project can have multiple Contracts
+//    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Contract> contracts;
+//
+//    //Add ManyToOne relationship to Client
+//    @ManyToOne
+//    @JoinColumn(name = "client_id") // Foreign key reference
+//    private Client client;
 
-    @DBRef
-    private Contract contract;
 
-    @DBRef
-    private Client client;
 
-    @DBRef
-    private Consultant consultant;
 }

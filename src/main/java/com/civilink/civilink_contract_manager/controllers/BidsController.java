@@ -2,7 +2,16 @@ package com.civilink.civilink_contract_manager.controllers;
 
 
 import com.civilink.civilink_contract_manager.dtos.requests.*;
+
+
 import com.civilink.civilink_contract_manager.dtos.response.*;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseAddBidInvitationDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseBidDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseBidInvitationDto;
+import com.civilink.civilink_contract_manager.dtos.response.ResponseBidItemDto;
+
+
+
 import com.civilink.civilink_contract_manager.services.BidInvitationService;
 import com.civilink.civilink_contract_manager.services.BidService;
 import com.civilink.civilink_contract_manager.util.StandardResponse;
@@ -69,6 +78,10 @@ public class BidsController {
         );
     }
 
+  
+
+
+
     @GetMapping("/search-bid-invitation")
     public ResponseEntity<StandardResponse> searchInvitation(
             @RequestBody RequestAllBidInvitationDto requestAllBidInvitationDto
@@ -108,6 +121,22 @@ public class BidsController {
         );
     }
 
+
+
+
+    @DeleteMapping("/delete-bid-invitation")
+    public ResponseEntity<StandardResponse> deleteBidInvitation(
+            @RequestBody RequestDeleteBidInvitationDto requestDeleteBidInvitationDto
+            ){
+        bidInvitationService.deleteBidInvitation(requestDeleteBidInvitationDto);
+
+
+
+        return new ResponseEntity<>(
+                new StandardResponse(200,"Bid invitation deleted",""),
+                HttpStatus.CREATED
+        );
+    }
 
 
 
