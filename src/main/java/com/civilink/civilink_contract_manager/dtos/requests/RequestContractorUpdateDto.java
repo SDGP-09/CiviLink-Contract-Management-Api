@@ -11,7 +11,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 @Builder
 
 public class RequestContractorUpdateDto {
@@ -22,4 +22,44 @@ public class RequestContractorUpdateDto {
 
     private List<Post> posts;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public List<BidResponse> getBidResponses() {
+        return bidResponses;
+    }
+
+    public void setBidResponses(List<BidResponse> bidResponses) {
+        this.bidResponses = bidResponses;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 }

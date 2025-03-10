@@ -8,10 +8,18 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 @Builder
 
 public class ResponseClientDto {
 
     private Client updatedClient;
+
+    public Client getUpdatedClient() {
+        return updatedClient;
+    }
+
+    public void setUpdatedClient(Client updatedClient) {
+        this.updatedClient = updatedClient;
+    }
 }

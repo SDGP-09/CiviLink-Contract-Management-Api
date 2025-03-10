@@ -9,10 +9,17 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 @Builder
 
 public class ResponseContractItemsAllDto {
     private ContractItems[] contractItems;
 
+    public ContractItems[] getContractItems() {
+        return contractItems;
+    }
+
+    public void setContractItems(ContractItems[] contractItems) {
+        this.contractItems = contractItems;
+    }
 }

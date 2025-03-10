@@ -6,8 +6,24 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 public class RequestAddBidInvitationDto {
     private String bidId;
     private String bidInvitationId;
+
+    public String getBidId() {
+        return bidId;
+    }
+
+    public void setBidId(String bidId) {
+        this.bidId = bidId;
+    }
+
+    public String getBidInvitationId() {
+        return bidInvitationId;
+    }
+
+    public void setBidInvitationId(String bidInvitationId) {
+        this.bidInvitationId = bidInvitationId;
+    }
 }

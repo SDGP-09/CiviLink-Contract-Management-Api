@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 @Builder
 
 public class Client {
@@ -22,7 +22,31 @@ public class Client {
     private String name;
     private String contact;
 
-//    // This is the list of projects associated with this client
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    //    // This is the list of projects associated with this client
 //    @OneToMany(mappedBy = "client")
 //    private List<Project> projectList;
 //

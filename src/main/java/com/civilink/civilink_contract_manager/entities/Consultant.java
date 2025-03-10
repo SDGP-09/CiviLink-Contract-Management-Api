@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 @Builder
 
 public class Consultant {
@@ -22,7 +22,31 @@ public class Consultant {
     private String name;
     private String specializations;
 
-//    @OneToMany(mappedBy = "consultant")  // This indicates a consultant can have multiple projects
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSpecializations() {
+        return specializations;
+    }
+
+    public void setSpecializations(String specializations) {
+        this.specializations = specializations;
+    }
+
+    //    @OneToMany(mappedBy = "consultant")  // This indicates a consultant can have multiple projects
 //    private List<Project> projects;  // List of projects for this consultant
 
 

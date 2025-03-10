@@ -8,9 +8,17 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 @Builder
 
 public class ResponseConsultantAllDto {
     private Consultant[] consultants;
+
+    public Consultant[] getConsultants() {
+        return consultants;
+    }
+
+    public void setConsultants(Consultant[] consultants) {
+        this.consultants = consultants;
+    }
 }

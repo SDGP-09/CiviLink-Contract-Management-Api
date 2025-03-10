@@ -10,7 +10,6 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
 public class Bid {
     @Id
@@ -19,7 +18,31 @@ public class Bid {
     private String clientName;
     private String activityName;
 
-//    @ManyToOne
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    //    @ManyToOne
 //    @JoinColumn(name = "project_id")  // Foreign key column for the relationship
 //    private Project project;  // This defines the relationship between Bid and Project
 //
