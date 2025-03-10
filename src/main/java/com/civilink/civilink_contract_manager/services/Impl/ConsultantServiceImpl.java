@@ -54,24 +54,25 @@ public class ConsultantServiceImpl implements ConsultantService {
 
     @Override
     public ResponseConsultantDto update(RequestConsultantUpdateDto requestConsultantUpdateDto) throws ConsultantNotFoundException {
-        Consultant consultant = consultantRepository.findById(Long.valueOf(requestConsultantUpdateDto.getId())).orElse(null);
-
-        if (consultant == null){
-            throw new ConsultantNotFoundException("Consultant not found with the id of: " + requestConsultantUpdateDto.getId());
-        }
-
-        if (requestConsultantUpdateDto.getName() != null) consultant.setName(requestConsultantUpdateDto.getName());
-        if (requestConsultantUpdateDto.getSpecializations() != null) consultant.setSpecializations(requestConsultantUpdateDto.getSpecializations());
-        if (requestConsultantUpdateDto.getProjectsList() != null) {
-            List<Project> updatedProjects = requestConsultantUpdateDto.getProjectsList()
-                    .stream()
-                    .map(project -> projectRepository.save(project))
-                    .toList();
-
-        }
-
-        Consultant updatedConsultant = consultantRepository.save(consultant);
-        return new ResponseConsultantDto(updatedConsultant);
+//        Consultant consultant = consultantRepository.findById(Long.valueOf(requestConsultantUpdateDto.getId())).orElse(null);
+//
+//        if (consultant == null){
+//            throw new ConsultantNotFoundException("Consultant not found with the id of: " + requestConsultantUpdateDto.getId());
+//        }
+//
+//        if (requestConsultantUpdateDto.getName() != null) consultant.setName(requestConsultantUpdateDto.getName());
+//        if (requestConsultantUpdateDto.getSpecializations() != null) consultant.setSpecializations(requestConsultantUpdateDto.getSpecializations());
+//        if (requestConsultantUpdateDto.getProjectsList() != null) {
+//            List<Project> updatedProjects = requestConsultantUpdateDto.getProjectsList()
+//                    .stream()
+//                    .map(project -> projectRepository.save(project))
+//                    .toList();
+//
+//        }
+//
+//        Consultant updatedConsultant = consultantRepository.save(consultant);
+//        return new ResponseConsultantDto(updatedConsultant);
+        return null;
     }
 
     @Override
