@@ -12,3 +12,5 @@ COPY --from=build /app/target/civilink-contract-manager.jar .
 
 EXPOSE 7071
 CMD ["java", "-jar", "civilink-contract-manager.jar"]
+
+# Test
