@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - Main
-  pull_request:
-    branches:
-      - Main
 
 jobs:
   build-and-push:
@@ -24,7 +21,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t lasithdev/contract-management:${{github.sha}} .
+          docker build --platform linux/amd64 -- no-cache -t lasithdev/contract-management:${{github.sha}} . 
           docker tag lasithdev/contract-management:${{github.sha}} lasithdev/contract-management:latest
 
       - name: Push Docker Image to Docker hub
