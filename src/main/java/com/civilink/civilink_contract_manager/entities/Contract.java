@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 @Builder
 
 public class Contract {
@@ -21,6 +21,29 @@ public class Contract {
     private String description;
     private String contractDate;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getContractDate() {
+        return contractDate;
+    }
+
+    public void setContractDate(String contractDate) {
+        this.contractDate = contractDate;
+    }
 
     // Link Contract to Project
 //    @ManyToOne

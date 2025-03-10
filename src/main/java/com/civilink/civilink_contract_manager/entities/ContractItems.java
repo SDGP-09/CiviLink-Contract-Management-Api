@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 @Builder
 public class ContractItems {
     @Id
@@ -19,7 +19,31 @@ public class ContractItems {
     private String url;
     private String description;
 
-//    @ManyToOne
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    //    @ManyToOne
 //    @JoinColumn(name = "contract_id") // Reference to Contract, NOT ContractItems
 //    private Contract contract;
 
