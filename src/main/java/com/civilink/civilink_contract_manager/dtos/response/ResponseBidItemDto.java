@@ -7,7 +7,15 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 public class ResponseBidItemDto {
     private BidItem bidItem;
+
+    public BidItem getBidItem() {
+        return bidItem;
+    }
+
+    public void setBidItem(BidItem bidItem) {
+        this.bidItem = bidItem;
+    }
 }

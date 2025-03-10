@@ -10,7 +10,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 @Builder
 
 public class RequestConsultantUpdateDto {
@@ -18,4 +18,36 @@ public class RequestConsultantUpdateDto {
     private String name;
     private String specializations;
     private List<Project> projectsList;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSpecializations() {
+        return specializations;
+    }
+
+    public void setSpecializations(String specializations) {
+        this.specializations = specializations;
+    }
+
+    public List<Project> getProjectsList() {
+        return projectsList;
+    }
+
+    public void setProjectsList(List<Project> projectsList) {
+        this.projectsList = projectsList;
+    }
 }
