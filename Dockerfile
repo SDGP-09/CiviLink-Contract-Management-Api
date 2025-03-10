@@ -1,14 +1,24 @@
 # Stage 1: Build the application
-FROM maven:3.8.6-amazoncorretto-17 AS build
+FROM maven:3.8.6-eclipse-temurin-17 AS builder
+
 WORKDIR /app
+
 COPY pom.xml .
 COPY src ./src
-RUN mvn package -DskipTests
+
+# Clean and package the application, skipping tests
+RUN mvn clean package -DskipTests
 
 # Stage 2: Create the final image
-FROM openjdk:17-alpine
-WORKDIR /app
-COPY --from=build /app/target/civilink-contract-manager.jar .
+FROM eclipse-temurin:17-jdk
 
-EXPOSE 7071
-CMD ["java", "-jar", "civilink-contract-manager.jar"]
+WORKDIR /app
+
+# Copy the built JAR from the builder stage
+COPY --from=builder /app/target/civilink-contract-manager.jar app.jar
+
+# Expose application port
+EXPOSE 8080
+
+# Run the application
+CMD ["java", "-jar", "app.jar"]
