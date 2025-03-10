@@ -18,7 +18,8 @@ WORKDIR /app
 COPY --from=builder /app/target/civilink-contract-manager.jar app.jar
 
 # Expose application port
-EXPOSE 8080
+EXPOSE 7071
 
 # Run the application
 CMD ["java", "-jar", "app.jar"]
+
