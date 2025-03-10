@@ -6,8 +6,23 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class RequestConsultantProjectDto {
     private String consultantId;
     private String projectId;
+
+    public String getConsultantId() {
+        return consultantId;
+    }
+
+    public void setConsultantId(String consultantId) {
+        this.consultantId = consultantId;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
 }
