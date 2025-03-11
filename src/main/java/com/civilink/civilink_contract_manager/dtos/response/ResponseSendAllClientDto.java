@@ -8,8 +8,16 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 
 public class ResponseSendAllClientDto {
     private Client[] allClients;
+
+    public Client[] getAllClients() {
+        return allClients;
+    }
+
+    public void setAllClients(Client[] allClients) {
+        this.allClients = allClients;
+    }
 }

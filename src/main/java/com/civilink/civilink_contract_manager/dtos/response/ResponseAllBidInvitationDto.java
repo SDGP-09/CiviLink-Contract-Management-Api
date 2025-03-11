@@ -8,9 +8,16 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 
 public class ResponseAllBidInvitationDto {
     private BidInvitation[] bidInvitations;
 
+    public BidInvitation[] getBidInvitations() {
+        return bidInvitations;
+    }
+
+    public void setBidInvitations(BidInvitation[] bidInvitations) {
+        this.bidInvitations = bidInvitations;
+    }
 }

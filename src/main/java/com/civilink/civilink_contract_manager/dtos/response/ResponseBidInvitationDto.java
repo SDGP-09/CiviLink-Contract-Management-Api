@@ -6,10 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseBidInvitationDto {
     private BidInvitation bidInvitation;
 
+    public BidInvitation getBidInvitation() {
+        return bidInvitation;
+    }
+
+    public void setBidInvitation(BidInvitation bidInvitation) {
+        this.bidInvitation = bidInvitation;
+    }
 }
