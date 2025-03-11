@@ -86,7 +86,7 @@ public class BidServiceImpl implements BidService {
 
 
         
-        bid.setProjectName(requestAllBidDto.getProjectName());
+        //bid.setProjectName(requestAllBidDto.getProjectName());
         
 
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
